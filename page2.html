@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NajjoBazer Options</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <form>
+            <img src="20250120_044627.png" alt="Placeholder Image" class="form-image">
+
+            <div class="button-container">
+                <button type="button" onclick="navigateTo('krishok.html')">কৃষক</button>
+                <button type="button" onclick="navigateTo('paikari.html')">পাইকারি ব্যবসায়ী</button>
+                <button type="button" onclick="navigateTo('khochra.html')">খুচরা ব্যবসায়ী</button>
+                <button type="button" onclick="navigateTo('shakshobji.html')">শাক-সবজি</button>
+                <button type="button" onclick="navigateTo('khadyashashyo.html')">খাদ্য শস্য</button>
+                <button type="button" onclick="navigateTo('khamar.html')">খামারজাত পণ্য</button>
+            </div>
+            
+            <button type="button" class="help-line" onclick="navigateTo('helpline.html')">হেল্প লাইন</button>
+        </form>
+    </div>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
