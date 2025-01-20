@@ -1,6 +1,6 @@
 // Validate form input and navigate to the next page
 function navigateToNextPage(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent the form from submitting normally
 
     const fixedValues = {
         box1: "Dhaka",
@@ -19,4 +19,5 @@ function navigateToNextPage(event) {
 
     // Navigate to the second page
     window.location.href = "page2.html";
+    return true;
 }
