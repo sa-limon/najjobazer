@@ -37,29 +37,27 @@
             transition: right 0.3s ease-in-out;
             z-index: 1000;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* Active state for the menu */
-        .side-menu.active {
-            right: 0; /* Slides in from the right */
-        }
-
-        /* Back button in the side menu */
-        .back-button {
-            display: block;
+        /* Side menu header */
+        .side-menu-header {
+            text-align: center;
+            font-weight: bold;
+            color: #7ebe5b;
+            font-size: 24px;
+            border-bottom: 2px solid #26536c;
             margin-bottom: 20px;
-            background-color: white;
-            color: #BF592B;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
-        .back-button:hover {
-            background-color: #007BFF;
-            color: white;
+        /* Side menu footer */
+        .side-menu-footer {
+            text-align: center;
+            font-size: 12px;
+            font-style: italic;
+            color: lightgray;
         }
 
         /* Side menu buttons */
@@ -81,7 +79,24 @@
             color: white;
         }
 
-        /* Button grid styling */
+        /* Back button styling */
+        .back-button {
+            width: 66%; /* Two-thirds of other buttons */
+            align-self: center;
+            background-color: #7ebe5b;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Page content button grid */
         .button-grid {
             display: grid;
             grid-template-columns: 1fr 1fr; /* Two columns */
@@ -90,7 +105,7 @@
             margin-bottom: 20px;
         }
 
-        /* Single centered button */
+        /* Centered button */
         .centered-button {
             display: flex;
             justify-content: center;
@@ -101,14 +116,14 @@
             padding: 15px;
             font-size: 16px;
             color: white;
-            background-color: #007BFF;
+            background-color: red; /* Changed to red */
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
 
         .centered-button button:hover {
-            background-color: #0056b3;
+            background-color: #b30000;
         }
     </style>
 </head>
@@ -140,13 +155,19 @@
 
     <!-- Side Menu -->
     <div class="side-menu" id="sideMenu">
-        <!-- Back button -->
-        <button class="back-button" onclick="toggleMenu()">Back</button>
+        <!-- Header -->
+        <div class="side-menu-header">NajjoBazer</div>
 
         <!-- Menu buttons -->
         <button onclick="window.location.href='index.html'">Home</button>
         <button onclick="window.location.href='about.html'">About Us</button>
         <button onclick="window.location.href='login.html'">Login/Register</button>
+
+        <!-- Back button -->
+        <button class="back-button" onclick="toggleMenu()">Back</button>
+
+        <!-- Footer -->
+        <div class="side-menu-footer">Designed and Developed by Md. Sharif Alom</div>
     </div>
 
     <script>
@@ -157,4 +178,4 @@
         }
     </script>
 </body>
-    </html>
+</html>
