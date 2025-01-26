@@ -44,6 +44,24 @@
             right: 0; /* Slides in from the right */
         }
 
+        /* Back button in the side menu */
+        .back-button {
+            display: block;
+            margin-bottom: 20px;
+            background-color: white;
+            color: #BF592B;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+
         /* Side menu buttons */
         .side-menu button {
             display: block;
@@ -62,6 +80,36 @@
             background-color: #007BFF;
             color: white;
         }
+
+        /* Button grid styling */
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns */
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        /* Single centered button */
+        .centered-button {
+            display: flex;
+            justify-content: center;
+        }
+
+        .centered-button button {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .centered-button button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -73,13 +121,18 @@
         <form>
             <img src="20250120_044627.png" alt="Placeholder Image" class="form-image">
 
-            <div class="input-container">
+            <!-- Buttons grid -->
+            <div class="button-grid">
                 <button type="button" onclick="window.location.href='krishok.html'">কৃষক</button>
                 <button type="button" onclick="window.location.href='paikari.html'">পাইকারি ব্যবসায়ী</button>
                 <button type="button" onclick="window.location.href='khuchra.html'">খুচরা ব্যবসায়ী</button>
                 <button type="button" onclick="window.location.href='shakshobji.html'">শাক-সবজি</button>
                 <button type="button" onclick="window.location.href='khadyashashyo.html'">খাদ্য শস্য</button>
                 <button type="button" onclick="window.location.href='khamar.html'">খামারজাত পণ্য</button>
+            </div>
+
+            <!-- Single centered button -->
+            <div class="centered-button">
                 <button type="button" onclick="window.location.href='helpline.html'">হেল্প লাইন</button>
             </div>
         </form>
@@ -87,6 +140,10 @@
 
     <!-- Side Menu -->
     <div class="side-menu" id="sideMenu">
+        <!-- Back button -->
+        <button class="back-button" onclick="toggleMenu()">Back</button>
+
+        <!-- Menu buttons -->
         <button onclick="window.location.href='index.html'">Home</button>
         <button onclick="window.location.href='about.html'">About Us</button>
         <button onclick="window.location.href='login.html'">Login/Register</button>
@@ -100,4 +157,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
