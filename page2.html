@@ -3,30 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NajjoBazer Options</title>
+    <title>Page 2</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Three-dot button styling */
+        .menu-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* Sliding menu container */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -66%;
+            height: 100%;
+            width: 66%;
+            background-color: #BF592B; /* Ruddy orange */
+            color: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        /* Active state for the menu */
+        .side-menu.active {
+            right: 0;
+        }
+
+        /* Side menu buttons */
+        .side-menu button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            background-color: white;
+            color: #BF592B;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .side-menu button:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <!-- Three-dot button -->
+        <button class="menu-button" onclick="toggleMenu()">⋮</button>
+
+        <!-- Main content -->
         <form>
             <img src="20250120_044627.png" alt="Placeholder Image" class="form-image">
 
-            <div class="button-container">
-                <button type="button" onclick="navigateTo('krishok.html')">কৃষক</button>
-                <button type="button" onclick="navigateTo('paikari.html')">পাইকারি ব্যবসায়ী</button>
-                <button type="button" onclick="navigateTo('khochra.html')">খুচরা ব্যবসায়ী</button>
-                <button type="button" onclick="navigateTo('shakshobji.html')">শাক-সবজি</button>
-                <button type="button" onclick="navigateTo('khadyashashyo.html')">খাদ্য শস্য</button>
-                <button type="button" onclick="navigateTo('khamar.html')">খামারজাত পণ্য</button>
+            <div class="input-container">
+                <button type="button" onclick="window.location.href='krishok.html'">কৃষক</button>
+                <button type="button" onclick="window.location.href='paikari.html'">পাইকারি ব্যবসায়ী</button>
+                <button type="button" onclick="window.location.href='khuchra.html'">খুচরা ব্যবসায়ী</button>
+                <button type="button" onclick="window.location.href='shakshobji.html'">শাক-সবজি</button>
+                <button type="button" onclick="window.location.href='khadyashashyo.html'">খাদ্য শস্য</button>
+                <button type="button" onclick="window.location.href='khamar.html'">খামারজাত পণ্য</button>
+                <button type="button" onclick="window.location.href='helpline.html'">হেল্প লাইন</button>
             </div>
-            
-            <button type="button" class="help-line" onclick="navigateTo('helpline.html')">হেল্প লাইন</button>
         </form>
     </div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+        <button onclick="window.location.href='index.html'">Home</button>
+        <button onclick="window.location.href='about.html'">About Us</button>
+        <button onclick="window.location.href='login.html'">Login/Register</button>
+    </div>
+
     <script>
-        function navigateTo(page) {
-            window.location.href = page;
+        // Toggle the sliding menu
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            menu.classList.toggle('active');
         }
     </script>
 </body>
-</html>
+                    </html>
