@@ -49,26 +49,19 @@
         /* Side menu header */
         .side-menu-header {
             text-align: center;
+            font-size: 24px;
             font-weight: bold;
             color: #7ebe5b;
-            font-size: 24px;
-            border-bottom: 2px solid #26536c;
+            -webkit-text-stroke: 1px #26536c; /* Stroke around the text */
+            text-stroke: 1px #26536c;
             margin-bottom: 20px;
         }
 
-        /* Side menu footer */
-        .side-menu-footer {
-            text-align: center;
-            font-size: 12px;
-            font-style: italic;
-            color: lightgray;
-        }
-
-        /* Side menu buttons */
+        /* Reduced button spacing */
         .side-menu button {
             display: block;
             width: 100%;
-            margin: 10px 0;
+            margin: 10px 0; /* Reduced spacing */
             padding: 15px;
             background-color: white;
             color: #BF592B;
@@ -100,11 +93,20 @@
             background-color: #0056b3;
         }
 
+        /* Footer styling */
+        .side-menu-footer {
+            text-align: center;
+            font-size: 12px;
+            font-style: italic;
+            color: lightgray;
+            margin-top: auto;
+        }
+
         /* Page content button grid */
         .button-grid {
             display: grid;
             grid-template-columns: 1fr 1fr; /* Two columns */
-            gap: 20px;
+            gap: 10px; /* Same spacing as other pages */
             justify-content: center;
             margin-bottom: 20px;
         }
@@ -167,11 +169,11 @@
         <button onclick="window.location.href='about.html'">About Us</button>
         <button onclick="window.location.href='login.html'">Login/Register</button>
 
-        <!-- Back button -->
-        <button class="back-button" onclick="toggleMenu()">Back</button>
-
         <!-- Footer -->
         <div class="side-menu-footer">Designed and Developed by Md. Sharif Alom</div>
+
+        <!-- Back button -->
+        <button class="back-button" onclick="toggleMenu()">Back</button>
     </div>
 
     <script>
