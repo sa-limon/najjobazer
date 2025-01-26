@@ -28,9 +28,9 @@
         .side-menu {
             position: fixed;
             top: 0;
-            right: -66%;
+            right: -100%; /* Fully hidden initially */
             height: 100%;
-            width: 66%;
+            width: 66%; /* Covers two-thirds of the page */
             background-color: #BF592B; /* Ruddy orange */
             color: white;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
@@ -41,7 +41,7 @@
 
         /* Active state for the menu */
         .side-menu.active {
-            right: 0;
+            right: 0; /* Slides in from the right */
         }
 
         /* Side menu buttons */
@@ -100,4 +100,4 @@
         }
     </script>
 </body>
-                    </html>
+</html>
