@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>কৃষি অর্থ সহায়তা | NajjoBazer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f9f1;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #2c5e1a;
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #d4edbf;
+        }
+        
+        .tab {
+            padding: 10px 15px;
+            background-color: #f5f9f1;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid #4a8c2b;
+            font-weight: 600;
+            color: #2c5e1a;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d4edbf;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f9fcf5;
+        }
+        
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #4a8c2b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #3a7c1b;
+            transform: translateY(-2px);
+        }
+        
+        .info-card {
+            background-color: #e8f4e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4a8c2b;
+        }
+        
+        .info-card h3 {
+            margin-top: 0;
+            color: #2c5e1a;
+        }
+        
+        .info-card p {
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+        
+        .back-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            background-color: #f5a623;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #e0951a;
+        }
+        
+        .required:after {
+            content: " *";
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="20250120_044627.png" alt="NajjoBazer Logo" class="logo">
+            <h1>কৃষি অর্থ সহায়তা</h1>
+            <p>সরকারি ভর্তুকি ও এনজিও ঋণের জন্য আবেদন করুন</p>
+        </div>
+        
+        <div class="tab-container">
+            <button class="tab active" onclick="openTab('subsidy')">সরকারি ভর্তুকি</button>
+            <button class="tab" onclick="openTab('loan')">এনজিও ঋণ</button>
+        </div>
+        
+        <!-- Government Subsidy Tab -->
+        <div id="subsidy" class="tab-content active">
+            <div class="info-card">
+                <h3>সরকারি কৃষি ভর্তুকি</h3>
+                <p>কৃষি মন্ত্রণালয়ের আওতায় বিভিন্ন কৃষি উপকরণে ভর্তুকি প্রদান করা হয়। আবেদনের জন্য নিচের ফর্মটি পূরণ করুন। আবেদন যাচাই শেষে আপনার মোবাইলে এসএমএসের মাধ্যমে জানিয়ে দেওয়া হবে।</p>
+            </div>
+            
+            <div class="form-card">
+                <form id="subsidyForm">
+                    <div class="form-group">
+                        <label class="required">পূর্ণ নাম</label>
+                        <input type="text" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">মোবাইল নম্বর</label>
+                        <input type="tel" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">জাতীয় ID নম্বর</label>
+                        <input type="text" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">জেলা</label>
+                        <select required>
+                            <option value="">নির্বাচন করুন</option>
+                            <option value="dhaka">ঢাকা</option>
+                            <option value="gazipur">গাজীপুর</option>
+                            <option value="tangail">টাঙ্গাইল</option>
+                            <option value="bogra">বগুড়া</option>
+                            <option value="jessore">যশোর</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">উপজেলা</label>
+                        <input type="text" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">ভর্তুকির ধরন</label>
+                        <select required>
+                            <option value="">নির্বাচন করুন</option>
+                            <option value="fertilizer">সার ভর্তুকি</option>
+                            <option value="seed">বীজ ভর্তুকি</option>
+                            <option value="irrigation">সেচ ভর্তুকি</option>
+                            <option value="machine">কৃষি যন্ত্রপাতি ভর্তুকি</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>জমির পরিমাণ (একর)</label>
+                        <input type="number">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">আবেদন জমা দিন</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- NGO Loan Tab -->
+        <div id="loan" class="tab-content">
+            <div class="info-card">
+                <h3>এনজিও কৃষি ঋণ</h3>
+                <p>আমাদের পার্টনার এনজিও সংস্থাগুলো থেকে সর্বনিম্ন সুদে কৃষি ঋণ পাওয়ার জন্য আবেদন করুন। ঋণের পরিমাণ ১০,০০০ টাকা থেকে ৫০,০০০ টাকা পর্যন্ত।</p>
+            </div>
+            
+            <div class="form-card">
+                <form id="loanForm">
+                    <div class="form-group">
+                        <label class="required">পূর্ণ নাম</label>
+                        <input type="text" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">মোবাইল নম্বর</label>
+                        <input type="tel" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">জেলা</label>
+                        <select required>
+                            <option value="">নির্বাচন করুন</option>
+                            <option value="dhaka">ঢাকা</option>
+                            <option value="gazipur">গাজীপুর</option>
+                            <option value="tangail">টাঙ্গাইল</option>
+                            <option value="bogra">বগুড়া</option>
+                            <option value="jessore">যশোর</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">ঋণের পরিমাণ</label>
+                        <select required>
+                            <option value="">নির্বাচন করুন</option>
+                            <option value="10000">১০,০০০ টাকা</option>
+                            <option value="20000">২০,০০০ টাকা</option>
+                            <option value="30000">৩০,০০০ টাকা</option>
+                            <option value="50000">৫০,০০০ টাকা</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">ঋণের উদ্দেশ্য</label>
+                        <select required>
+                            <option value="">নির্বাচন করুন</option>
+                            <option value="crops">ফসল উৎপাদন</option>
+                            <option value="livestock">পশুপালন</option>
+                            <option value="fishing">মৎস্য চাষ</option>
+                            <option value="equipment">কৃষি যন্ত্রপাতি</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>অতিরিক্ত তথ্য (যদি থাকে)</label>
+                        <textarea></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">ঋণের জন্য আবেদন করুন</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h3>যোগাযোগ</h3>
+            <p>কোনো প্রশ্ন থাকলে কল করুন: ০১৯৯৩৩২৭০৭৭ (হেল্পলাইন) বা ইমেইল করুন: mdsharifalom95@gmail.com </p>
+        </div>
+        
+        <button class="back-btn" onclick="window.location.href='index.html'">← হোম পেজে ফিরে যান</button>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all tabs
+            const tabs = document.getElementsByClassName('tab');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            // Show the current tab and mark button as active
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Form submission handlers
+        document.getElementById('subsidyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('সরকারি ভর্তুকির আবেদন সফলভাবে জমা হয়েছে! ৩ কার্যদিবসের মধ্যে আপনার মোবাইলে জানানো হবে।');
+            this.reset();
+        });
+        
+        document.getElementById('loanForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('এনজিও ঋণের আবেদন সফলভাবে জমা হয়েছে! আমাদের প্রতিনিধি আপনার সাথে যোগাযোগ করবেন।');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
