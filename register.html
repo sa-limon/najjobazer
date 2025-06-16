@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>রেজিস্ট্রেশন | NajjoBazer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <img src="assets/logo.png" class="logo" alt="Logo">
+    <h2>রেজিস্ট্রেশন</h2>
+    <form id="registerForm">
+      <input type="text" name="name" placeholder="নাম" required>
+      <input type="text" name="role" placeholder="ভূমিকা (Farmer/Middlemen/etc)" required>
+      <input type="text" name="district" placeholder="জেলা" required>
+      <input type="text" name="upazila" placeholder="উপজেলা" required>
+      <input type="text" name="username" placeholder="ব্যবহারকারীর নাম" required>
+      <input type="password" name="password" placeholder="পাসওয়ার্ড" required>
+      <button type="submit">রেজিস্টার করুন</button>
+    </form>
+    <div class="link-group">
+      <a href="login.html">লগইন পেজে যান</a>
+      <a href="index.html">🏠 হোম</a>
+    </div>
+  </div>
+  <script>
+    const scriptURL = "YOUR_DEPLOYED_WEB_APP_URL"; // Replace with your own
+
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(response => {
+          alert("রেজিস্ট্রেশন সফল হয়েছে!");
+          window.location.href = "login.html";
+        })
+        .catch(error => alert("রেজিস্ট্রেশন ব্যর্থ হয়েছে!"));
+    });
+  </script>
+</body>
+</html>
