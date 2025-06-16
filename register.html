@@ -1,43 +1,157 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>রেজিস্ট্রেশন | NajjoBazer</title>
-  <link rel="stylesheet" href="stylesloginreg.css">
+    <meta charset="UTF-8">
+    <title>নজ্জোবাজার - রেজিস্টার</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f9f1; /* Light green background */
+            padding: 20px;
+            margin: 0;
+        }
+        
+        h1 {
+            color: #2c5e1a; /* Dark green */
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        form {
+            max-width: 400px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #d4edbf; /* Light green border */
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4a8c2b; /* Primary green */
+            box-shadow: 0 0 0 2px rgba(74, 140, 43, 0.2);
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            margin: 15px 0 5px;
+            background-color: #4a8c2b; /* Primary green */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            background-color: #3a6e22; /* Darker green */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn {
+            display: block;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .home-btn a {
+            text-decoration: none;
+            background: #26536c; /* Deep blue-green */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .home-btn a:hover {
+            background: #1d4255;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+        
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a8c2b'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 15px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <img src="20250120_044627.png" class="logo" alt="Logo">
-    <h2>রেজিস্ট্রেশন</h2>
-    <form id="registerForm">
-      <input type="text" name="name" placeholder="নাম" required>
-      <input type="text" name="role" placeholder="ভূমিকা (Farmer/Middlemen/etc)" required>
-      <input type="text" name="district" placeholder="জেলা" required>
-      <input type="text" name="upazila" placeholder="উপজেলা" required>
-      <input type="text" name="username" placeholder="ব্যবহারকারীর নাম" required>
-      <input type="password" name="password" placeholder="পাসওয়ার্ড" required>
-      <button type="submit">রেজিস্টার করুন</button>
-    </form>
-    <div class="link-group">
-      <a href="login.html">লগইন পেজে যান</a>
-      <a href="index.html">🏠 হোম</a>
+    <div class="home-btn">
+        <a href="index.html">🏠 হোম</a>
     </div>
-  </div>
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxBFOtRHRnET8jyIus7_oUqFBqhHMY0KzcZhrAqfJWbm_SYuTyJd8DuJNfpz7e3MLhS/exec"; // Replace with your own
+    <h1>নতুন রেজিস্ট্রেশন</h1>
+    <form id="registerForm">
+        <input type="text" id="name" placeholder="নাম" required>
+        <select id="role" required>
+            <option value="">ভূমিকা নির্বাচন করুন</option>
+            <option value="Farmer">কৃষক</option>
+            <option value="Middleman">মধ্যস্থ</option>
+            <option value="EndSeller">শেষ বিক্রেতা</option>
+            <option value="Buyer">ক্রেতা</option>
+            <option value="Agent">এজেন্ট</option>
+            <option value="Admin">অ্যাডমিন</option>
+        </select>
+        <input type="text" id="district" placeholder="জেলা" required>
+        <input type="text" id="upzilla" placeholder="উপজেলা" required>
+        <input type="text" id="username" placeholder="ব্যবহারকারীর নাম" required>
+        <input type="password" id="password" placeholder="পাসওয়ার্ড" required>
+        <button type="submit">রেজিস্টার</button>
+    </form>
 
-    document.getElementById("registerForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-
-      fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => {
-          alert("রেজিস্ট্রেশন সফল হয়েছে!");
-          window.location.href = "login.html";
-        })
-        .catch(error => alert("রেজিস্ট্রেশন ব্যর্থ হয়েছে!"));
-    });
-  </script>
+    <script>
+        const scriptURL = 'YOUR_SCRIPT_URL'; // Replace this with your script URL
+        document.getElementById("registerForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById("name").value,
+                role: document.getElementById("role").value,
+                district: document.getElementById("district").value,
+                upzilla: document.getElementById("upzilla").value,
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+                action: "register"
+            };
+            fetch(scriptURL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(result => {
+                alert(result.message);
+                if (result.result === "success") {
+                    window.location.href = "login.html";
+                }
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                alert("Registration failed. Please try again.");
+            });
+        });
+    </script>
 </body>
 </html>
