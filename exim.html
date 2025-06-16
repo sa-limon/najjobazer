@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>কৃষি রপ্তানি-আমদানি | NajjoBazer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f9f1;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #2c5e1a;
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .update-info {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .data-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .data-title {
+            color: #4a8c2b;
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .product-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .product-name {
+            font-weight: 500;
+            width: 40%;
+        }
+        
+        .product-data {
+            width: 60%;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .export {
+            color: #2c5e1a;
+            font-weight: 600;
+        }
+        
+        .import {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .chart-container {
+            height: 200px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .chart-label {
+            position: absolute;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .trend-indicator {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+        
+        .up-trend {
+            color: #2c5e1a;
+        }
+        
+        .down-trend {
+            color: #e74c3c;
+        }
+        
+        .info-text {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #666;
+        }
+        
+        .back-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            background-color: #4a8c2b;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #3a7c1b;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #d4edbf;
+        }
+        
+        .tab {
+            padding: 10px 15px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid #4a8c2b;
+            font-weight: 600;
+            color: #2c5e1a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="20250120_044627.png" alt="NajjoBazer Logo" class="logo">
+            <h1>কৃষি রপ্তানি-আমদানি বিশ্লেষণ</h1>
+            <div class="update-info">তথ্য আপডেট: ২৫ জুন ২০২৪ | সূত্র: কৃষকদের কাছ থেকে সংগৃহীত তথ্য</div>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('current')">বর্তমান অবস্থা</button>
+            <button class="tab" onclick="showTab('forecast')">ভবিষ্যত পূর্বাভাস</button>
+        </div>
+        
+        <div id="current-tab">
+            <div class="data-card">
+                <h2 class="data-title">শীর্ষ রপ্তানি পণ্য</h2>
+                <div class="product-row">
+                    <span class="product-name">হলুদ</span>
+                    <div class="product-data">
+                        <span class="export">১২০ টন <span class="trend-indicator up-trend">↑ ১২%</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">মরিচ</span>
+                    <div class="product-data">
+                        <span class="export">৮৫ টন <span class="trend-indicator up-trend">↑ ৮%</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">আম</span>
+                    <div class="product-data">
+                        <span class="export">৬৫ টন <span class="trend-indicator down-trend">↓ ৫%</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">চিংড়ি</span>
+                    <div class="product-data">
+                        <span class="export">৪২ টন <span class="trend-indicator up-trend">↑ ১৫%</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="data-card">
+                <h2 class="data-title">শীর্ষ আমদানি পণ্য</h2>
+                <div class="product-row">
+                    <span class="product-name">গম</span>
+                    <div class="product-data">
+                        <span class="import">৩২০ টন <span class="trend-indicator up-trend">↑ ১৮%</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">ডাল</span>
+                    <div class="product-data">
+                        <span class="import">১৫০ টন <span class="trend-indicator down-trend">↓ ৩%</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">পালং শাক</span>
+                    <div class="product-data">
+                        <span class="import">৮০ টন <span class="trend-indicator up-trend">↑ ২২%</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="data-card">
+                <h2 class="data-title">চাহিদা বিশ্লেষণ</h2>
+                <div class="chart-container">
+                    <div class="chart-label">হলুদ</div>
+                    <div class="chart-bar" style="width: 80%; left: 0; background-color: #4a8c2b;"></div>
+                    <div class="chart-label" style="bottom: 30px;">মরিচ</div>
+                    <div class="chart-bar" style="width: 65%; left: 0; bottom: 30px; background-color: #4a8c2b;"></div>
+                    <div class="chart-label" style="bottom: 60px;">গম</div>
+                    <div class="chart-bar" style="width: 70%; left: 0; bottom: 60px; background-color: #e74c3c;"></div>
+                    <div class="chart-label" style="bottom: 90px;">ডাল</div>
+                    <div class="chart-bar" style="width: 50%; left: 0; bottom: 90px; background-color: #e74c3c;"></div>
+                </div>
+                <p class="info-text">* সবুজ বার রপ্তানি চাহিদা, লাল বার আমদানি চাহিদা নির্দেশ করে</p>
+            </div>
+        </div>
+        
+        <div id="forecast-tab" style="display: none;">
+            <div class="data-card">
+                <h2 class="data-title">পরবর্তী ৬ মাসের পূর্বাভাস</h2>
+                <div class="product-row">
+                    <span class="product-name">হলুদ</span>
+                    <div class="product-data">
+                        <span class="export">১৫% বৃদ্ধি <span class="trend-indicator up-trend">↑</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">মরিচ</span>
+                    <div class="product-data">
+                        <span class="export">১০% বৃদ্ধি <span class="trend-indicator up-trend">↑</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">আম</span>
+                    <div class="product-data">
+                        <span class="export">২০% বৃদ্ধি <span class="trend-indicator up-trend">↑</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">গম</span>
+                    <div class="product-data">
+                        <span class="import">১২% বৃদ্ধি <span class="trend-indicator up-trend">↑</span></span>
+                    </div>
+                </div>
+                <p class="info-text">কৃষকদের উৎপাদন পরিকল্পনা ও বাজার বিশ্লেষণের ভিত্তিতে এই পূর্বাভাস তৈরি করা হয়েছে</p>
+            </div>
+            
+            <div class="data-card">
+                <h2 class="data-title">উদীয়মান বাজার</h2>
+                <div class="product-row">
+                    <span class="product-name">জৈব সবজি</span>
+                    <div class="product-data">
+                        <span class="export">ইউরোপ <span class="trend-indicator up-trend">নতুন</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">কাঁঠাল</span>
+                    <div class="product-data">
+                        <span class="export">মধ্যপ্রাচ্য <span class="trend-indicator up-trend">↑</span></span>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <span class="product-name">মধু</span>
+                    <div class="product-data">
+                        <span class="export">জাপান <span class="trend-indicator up-trend">↑</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="data-card">
+            <h2 class="data-title">কৃষকদের জন্য পরামর্শ</h2>
+            <p class="info-text">• হলুদ ও মরিচের চাহিদা বাড়ায় এসব ফসলের উৎপাদন বাড়ানোর সুযোগ রয়েছে<br>
+            • গমের আমদানি নির্ভরতা কমানোর জন্য স্থানীয় উৎপাদন বৃদ্ধির চেষ্টা করুন<br>
+            • জৈব পদ্ধতিতে সবজি চাষ করে ইউরোপীয় বাজারে প্রবেশের সুযোগ নিন</p>
+        </div>
+        
+        <button class="back-btn" onclick="window.location.href='index.html'">← হোম পেজে ফিরে যান</button>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.getElementById('current-tab').style.display = 'none';
+            document.getElementById('forecast-tab').style.display = 'none';
+            
+            // Remove active class from all tab buttons
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab and mark button as active
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Sample data processing (would be from backend in real implementation)
+        function processFarmerData() {
+            // This would analyze collected farmer data to generate export/import insights
+            console.log("Processing farmer data for export/import analysis...");
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            processFarmerData();
+        });
+    </script>
+</body>
+</html>
