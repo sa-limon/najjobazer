@@ -1,46 +1,171 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>লগইন | NajjoBazer</title>
-  <link rel="stylesheet" href="stylesloginreg.css">
+    <meta charset="UTF-8">
+    <title>নজ্জোবাজার - লগইন</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f9f1; /* Light green background */
+            padding: 20px;
+            margin: 0;
+        }
+        
+        h1 {
+            color: #2c5e1a; /* Dark green */
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        form {
+            max-width: 400px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #d4edbf; /* Light green border */
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4a8c2b; /* Primary green */
+            box-shadow: 0 0 0 2px rgba(74, 140, 43, 0.2);
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            margin: 15px 0 5px;
+            background-color: #4a8c2b; /* Primary green */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            background-color: #3a6e22; /* Darker green */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn {
+            display: block;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .home-btn a {
+            text-decoration: none;
+            background: #26536c; /* Deep blue-green */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .home-btn a:hover {
+            background: #1d4255;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+        
+        .link {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .link a {
+            text-decoration: none;
+            color: #26536c;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .link a:hover {
+            color: #4a8c2b;
+            text-decoration: underline;
+        }
+        
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a8c2b'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 15px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <img src="20250120_044627.png" class="logo" alt="Logo">
-    <h2>লগইন</h2>
-    <form id="loginForm">
-      <input type="text" id="username" placeholder="ব্যবহারকারীর নাম" required>
-      <input type="password" id="password" placeholder="পাসওয়ার্ড" required>
-      <button type="submit">লগইন</button>
-    </form>
-    <div class="link-group">
-      <a href="register.html">নতুন রেজিস্ট্রেশন</a>
-      <a href="index.html">🏠 হোম</a>
+    <div class="home-btn">
+        <a href="index.html">🏠 হোম</a>
     </div>
-  </div>
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxBFOtRHRnET8jyIus7_oUqFBqhHMY0KzcZhrAqfJWbm_SYuTyJd8DuJNfpz7e3MLhS/exec"; // Replace with your own
+    <h1>লগইন</h1>
+    <form id="loginForm">
+        <select id="role" required>
+            <option value="">ভূমিকা নির্বাচন করুন</option>
+            <option value="Farmer">কৃষক</option>
+            <option value="Middleman">মধ্যস্থ</option>
+            <option value="EndSeller">শেষ বিক্রেতা</option>
+            <option value="Buyer">ক্রেতা</option>
+            <option value="Agent">এজেন্ট</option>
+            <option value="Admin">অ্যাডমিন</option>
+        </select>
+        <input type="text" id="username" placeholder="ব্যবহারকারীর নাম" required>
+        <input type="password" id="password" placeholder="পাসওয়ার্ড" required>
+        <button type="submit">লগইন</button>
+    </form>
+    <div class="link">
+        <a href="register.html">নতুন রেজিস্টার করুন</a>
+    </div>
 
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const url = `${scriptURL}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-
-      fetch(url)
-        .then(res => res.text())
-        .then(response => {
-          if (response === "success") {
-            alert("লগইন সফল!");
-            window.location.href = "dashboard.html"; // Or based on user role
-          } else {
-            alert("ভুল ব্যবহারকারীর নাম বা পাসওয়ার্ড!");
-          }
-        })
-        .catch(err => alert("সার্ভারে ত্রুটি হয়েছে!"));
-    });
-  </script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxBFOtRHRnET8jyIus7_oUqFBqhHMY0KzcZhrAqfJWbm_SYuTyJd8DuJNfpz7e3MLhS/exec'; // Replace with your deployed Apps Script URL
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const data = {
+                role: document.getElementById("role").value,
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+                action: "login"
+            };
+            fetch(scriptURL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(result => {
+                alert(result.message);
+                if (result.result === "success") {
+                    window.location.href = "index.html"; // redirect on successful login
+                }
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                alert("Login failed. Please try again.");
+            });
+        });
+    </script>
 </body>
 </html>
