@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাজারদর | NajjoBazer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f9f1;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #2c5e1a;
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .update-info {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .price-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .category-title {
+            color: #4a8c2b;
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .product-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .product-name {
+            font-weight: 500;
+        }
+        
+        .product-price {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .unit {
+            color: #666;
+            font-size: 12px;
+            margin-left: 3px;
+        }
+        
+        .back-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            background-color: #f5a623;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #e0951a;
+            transform: translateY(-2px);
+        }
+        
+        .disclaimer {
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="20250120_044627.png" alt="NajjoBazer Logo" class="logo">
+            <h1>সরকারি নির্ধারিত বাজারদর</h1>
+            <div class="update-info">আপডেট: ২৫ জুন ২০২৪ | সূত্র: কৃষি মন্ত্রণালয়</div>
+        </div>
+        
+        <!-- Vegetables -->
+        <div class="price-card">
+            <h2 class="category-title">শাকসবজি (প্রতি কেজি)</h2>
+            <div class="product-row">
+                <span class="product-name">আলু</span>
+                <span class="product-price">৩৫<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">পেঁয়াজ</span>
+                <span class="product-price">৫৫<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">টমেটো</span>
+                <span class="product-price">৪০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">মরিচ</span>
+                <span class="product-price">১৮০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">বেগুন</span>
+                <span class="product-price">৩০<span class="unit">টাকা</span></span>
+            </div>
+        </div>
+        
+        <!-- Rice & Grains -->
+        <div class="price-card">
+            <h2 class="category-title">চাল ও শস্য (প্রতি কেজি)</h2>
+            <div class="product-row">
+                <span class="product-name">মিনিকেট চাল</span>
+                <span class="product-price">৬০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">নাজিরশাইল চাল</span>
+                <span class="product-price">৭০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">গম</span>
+                <span class="product-price">৪৫<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">ডাল (মসুর)</span>
+                <span class="product-price">১২০<span class="unit">টাকা</span></span>
+            </div>
+        </div>
+        
+        <!-- Meat & Fish -->
+        <div class="price-card">
+            <h2 class="category-title">মাছ-মাংস (প্রতি কেজি)</h2>
+            <div class="product-row">
+                <span class="product-name">গরুর মাংস</span>
+                <span class="product-price">৬৫০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">খাসির মাংস</span>
+                <span class="product-price">৭৫০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">মুরগির মাংস</span>
+                <span class="product-price">২২০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">ইলিশ মাছ</span>
+                <span class="product-price">১২০০<span class="unit">টাকা</span></span>
+            </div>
+        </div>
+        
+        <!-- Livestock -->
+        <div class="price-card">
+            <h2 class="category-title">পশুসম্পদ</h2>
+            <div class="product-row">
+                <span class="product-name">গরু (প্রতি কেজি)</span>
+                <span class="product-price">৫৫০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">ছাগল (প্রতি কেজি)</span>
+                <span class="product-price">৬০০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">হাঁস (প্রতি জোড়া)</span>
+                <span class="product-price">৩০০<span class="unit">টাকা</span></span>
+            </div>
+            <div class="product-row">
+                <span class="product-name">মুরগি (প্রতি জোড়া)</span>
+                <span class="product-price">২৫০<span class="unit">টাকা</span></span>
+            </div>
+        </div>
+        
+        <button class="back-btn" onclick="window.location.href='index.html'">← হোম পেজে ফিরে যান</button>
+        
+        <div class="disclaimer">
+            * এই মূল্যসমূহ কৃষি মন্ত্রণালয় কর্তৃক নির্ধারিত এবং সারাদেশের জন্য প্রযোজ্য।<br>
+            * স্থানীয় বাজার অবস্থা ও পণ্যের মানভেদে মূল্য ভিন্ন হতে পারে।
+        </div>
+    </div>
+</body>
+</html>
