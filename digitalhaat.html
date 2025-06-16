@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ডিজিটাল হাট | NajjoBazer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f9f1;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #2c5e1a;
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .search-bar {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #d4edbf;
+            border-radius: 8px 0 0 8px;
+            font-size: 14px;
+        }
+        
+        .search-bar button {
+            padding: 12px 15px;
+            background-color: #4a8c2b;
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+        }
+        
+        .categories {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+        }
+        
+        .category-btn {
+            padding: 8px 15px;
+            background-color: white;
+            border: 1px solid #d4edbf;
+            border-radius: 20px;
+            font-size: 13px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .category-btn.active {
+            background-color: #4a8c2b;
+            color: white;
+            border-color: #4a8c2b;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 12px;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin: 0 0 5px 0;
+            height: 36px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            color: #e74c3c;
+            font-weight: 700;
+            font-size: 16px;
+            margin: 0 0 5px 0;
+        }
+        
+        .product-unit {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .product-seller {
+            font-size: 12px;
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 8px;
+            background-color: #f5a623;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #e0951a;
+        }
+        
+        .back-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            background-color: #4a8c2b;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #3a7c1b;
+        }
+        
+        .cart-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #e74c3c;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="20250120_044627.png" alt="NajjoBazer Logo" class="logo">
+            <h1>ডিজিটাল হাট</h1>
+            <p>সরাসরি কৃষকের কাছ থেকে কিনুন</p>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="পণ্য খুঁজুন...">
+            <button>🔍</button>
+        </div>
+        
+        <div class="categories">
+            <button class="category-btn active">সব পণ্য</button>
+            <button class="category-btn">শাকসবজি</button>
+            <button class="category-btn">ফল</button>
+            <button class="category-btn">চাল-ডাল</button>
+            <button class="category-btn">মাছ-মাংস</button>
+            <button class="category-btn">মসলা</button>
+        </div>
+        
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="https://i.imgur.com/JqYeYnW.jpg" alt="Fresh Tomato" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">টমেটো (তাজা)</h3>
+                    <p class="product-price">৪০ <span class="product-unit">টাকা/কেজি</span></p>
+                    <p class="product-seller">রহিম উদ্দিন, গাজীপুর</p>
+                    <button class="add-to-cart">কার্টে যোগ করুন</button>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="https://i.imgur.com/pPQzExz.jpg" alt="Fine Rice" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">মিনিকেট চাল</h3>
+                    <p class="product-price">৬০ <span class="product-unit">টাকা/কেজি</span></p>
+                    <p class="product-seller">আকবর আলী, বগুড়া</p>
+                    <button class="add-to-cart">কার্টে যোগ করুন</button>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://i.imgur.com/8R3WQ2a.jpg" alt="Red Onion" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">লাল পেঁয়াজ</h3>
+                    <p class="product-price">৫৫ <span class="product-unit">টাকা/কেজি</span></p>
+                    <p class="product-seller">ফরিদা বেগম, পাবনা</p>
+                    <button class="add-to-cart">কার্টে যোগ করুন</button>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://i.imgur.com/LXQZqYJ.jpg" alt="Chicken" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">মুরগির মাংস</h3>
+                    <p class="product-price">২২০ <span class="product-unit">টাকা/কেজি</span></p>
+                    <p class="product-seller">ইসলাম ফার্ম, ঢাকা</p>
+                    <button class="add-to-cart">কার্টে যোগ করুন</button>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="https://i.imgur.com/VO3Feqy.jpg" alt="Lentils" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">মসুর ডাল</h3>
+                    <p class="product-price">১২০ <span class="product-unit">টাকা/কেজি</span></p>
+                    <p class="product-seller">করিম ট্রেডার্স, কুষ্টিয়া</p>
+                    <button class="add-to-cart">কার্টে যোগ করুন</button>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="https://i.imgur.com/9uD6u0V.jpg" alt="Green Chili" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">কাঁচা মরিচ</h3>
+                    <p class="product-price">১৮০ <span class="product-unit">টাকা/কেজি</span></p>
+                    <p class="product-seller">সেলিনা খাতুন, ঝিনাইদহ</p>
+                    <button class="add-to-cart">কার্টে যোগ করুন</button>
+                </div>
+            </div>
+        </div>
+        
+        <button class="back-btn" onclick="window.location.href='index.html'">← হোম পেজে ফিরে যান</button>
+        
+        <div class="cart-icon">🛒<span class="cart-count">3</span></div>
+    </div>
+
+    <script>
+        // Simple category filter functionality
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Here you would add filtering logic
+            });
+        });
+        
+        // Add to cart functionality
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('পণ্যটি আপনার কার্টে যোগ করা হয়েছে!');
+                // Here you would add actual cart functionality
+            });
+        });
+    </script>
+</body>
+</html>
