@@ -9,188 +9,155 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f9f1;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
         }
         
         .container {
-            max-width: 600px;
+            max-width: 400px;
             margin: 0 auto;
         }
         
         form {
             background-color: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            position: relative; /* Added for proper z-index */
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
         }
         
         .form-image {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: 0 auto 12px auto;
         }
         
         .input-container {
             background-color: #4a8c2b;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
         }
         
         .input-container h2 {
             color: white;
-            margin: 0;
-            padding-bottom: 10px;
+            margin: 0 0 8px 0;
             text-align: center;
-            font-size: 24px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            font-size: 18px;
         }
         
         .farmers-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-top: 20px; /* Added space for filter panel */
+            gap: 8px;
+            margin-top: 10px;
         }
         
         button {
-            padding: 15px;
-            font-size: 16px;
+            padding: 10px;
+            font-size: 14px;
             color: white;
             background-color: #5a9e3a;
             border: none;
-            border-radius: 10px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
         button:hover {
             background-color: #4a8c2b;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
         }
         
         form > button {
             width: 100%;
             background-color: #f5a623;
+            margin-top: 8px;
         }
         
         form > button:hover {
             background-color: #e0951a;
         }
         
-        .filter-container {
-            position: relative;
-            text-align: right;
-            margin-bottom: 10px;
-        }
-        
-        .filter-btn {
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .filter-bar {
             background-color: white;
-            color: #4a8c2b;
-            font-size: 20px;
-            border: none;
-            cursor: pointer;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
         
-        .filter-panel {
-            display: none;
-            background-color: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .filter-bar select {
             width: 100%;
-            margin-top: 10px;
-        }
-        
-        .filter-panel.active {
-            display: block;
-        }
-        
-        .filter-panel select {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border-radius: 5px;
+            padding: 6px;
+            border-radius: 4px;
             border: 1px solid #d4edbf;
+            font-size: 13px;
+        }
+        
+        .filter-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 5px;
+        }
+        
+        .filter-actions button {
+            flex: 1;
+            padding: 6px;
+            font-size: 13px;
         }
         
         .apply-filter {
             background-color: #4a8c2b;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 10px;
-            cursor: pointer;
-            width: 100%;
         }
         
         .reset-filter {
             background-color: #e74c3c;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 5px;
-            cursor: pointer;
-            width: 100%;
         }
         
         .no-results {
             color: white;
             text-align: center;
-            padding: 15px;
+            padding: 10px;
+            font-size: 13px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <form>
-            <img src="20250120_044627.png" alt="Placeholder Image" class="form-image">
+            <img src="20250120_044627.png" alt="NajjoBazer Logo" class="form-image">
+
+            <div class="filter-bar">
+                <select id="division">
+                    <option value="">Division</option>
+                    <option value="dhaka">Dhaka</option>
+                    <option value="chittagong">Chittagong</option>
+                    <option value="barishal">Barishal</option>
+                    <option value="khulna">Khulna</option>
+                </select>
+                <select id="district">
+                    <option value="">District</option>
+                    <option value="gazipur">Gazipur</option>
+                    <option value="shariatpur">Shariatpur</option>
+                    <option value="narayanganj">Narayanganj</option>
+                    <option value="tangail">Tangail</option>
+                </select>
+                <select id="upazila">
+                    <option value="">Upazila</option>
+                    <option value="sreepur">Sreepur</option>
+                    <option value="kapasia">Kapasia</option>
+                    <option value="bhedorgonj">Bhedorgonj</option>
+                    <option value="kaliakair">Kaliakair</option>
+                </select>
+                <div class="filter-actions">
+                    <button class="apply-filter" onclick="applyFilter()">Apply</button>
+                    <button class="reset-filter" onclick="resetFilter()">Reset</button>
+                </div>
+            </div>
 
             <div class="input-container">
-                <h2 style="color: white; margin: 0; padding-bottom: 10px;">Farmers List</h2>
-                
-                <div class="filter-container">
-                    <button class="filter-btn" onclick="toggleFilter()">🔍</button>
-                    <div class="filter-panel" id="filterPanel">
-                        <select id="division">
-                            <option value="">Select Division</option>
-                            <option value="dhaka">Dhaka</option>
-                            <option value="chittagong">Chittagong</option>
-                            <option value="khulna">Khulna</option>
-                            <option value="rajshahi">Rajshahi</option>
-                        </select>
-                        <select id="district">
-                            <option value="">Select District</option>
-                            <option value="gazipur">Gazipur</option>
-                            <option value="narayanganj">Narayanganj</option>
-                            <option value="tangail">Tangail</option>
-                            <option value="manikganj">Manikganj</option>
-                        </select>
-                        <select id="upazila">
-                            <option value="">Select Upazila</option>
-                            <option value="sreepur">Sreepur</option>
-                            <option value="kapasia">Kapasia</option>
-                            <option value="kaliakair">Kaliakair</option>
-                            <option value="kaliganj">Kaliganj</option>
-                        </select>
-                        <button class="apply-filter" onclick="applyFilter()">Apply Filter</button>
-                        <button class="reset-filter" onclick="resetFilter()">Reset Filter</button>
-                    </div>
-                </div>
+                <h2>Farmers List</h2>
                 
                 <div class="farmers-list" id="farmersList">
                     <button type="button" onclick="window.location.href='farmer1.html'">Abdul Karim</button>
@@ -206,22 +173,15 @@
     </div>
 
     <script>
-        // Sample farmer data with locations
         const farmers = [
-            { name: "Abdul Karim", division: "dhaka", district: "gazipur", upazila: "sreepur", link: "farmer1.html" },
+            { name: "Abdul Karim", division: "dhaka", district: "shariatpur", upazila: "bhedorgonj", link: "farmer1.html" },
             { name: "Hasan Ali", division: "dhaka", district: "gazipur", upazila: "kapasia", link: "farmer2.html" },
-            { name: "Rahima Begum", division: "dhaka", district: "narayanganj", upazila: "kaliganj", link: "farmer3.html" },
+            { name: "Rahima Begum", division: "dhaka", district: "shariatpur", upazila: "bhedorgonj", link: "farmer3.html" },
             { name: "Jalal Uddin", division: "chittagong", district: "tangail", upazila: "kaliakair", link: "farmer4.html" },
             { name: "Fatema Khatun", division: "khulna", district: "manikganj", upazila: "kaliganj", link: "farmer5.html" }
         ];
 
-        // Original list of farmers (for reset functionality)
         const originalFarmersList = document.getElementById('farmersList').innerHTML;
-
-        function toggleFilter() {
-            const panel = document.getElementById('filterPanel');
-            panel.classList.toggle('active');
-        }
 
         function applyFilter() {
             const division = document.getElementById('division').value;
@@ -238,7 +198,7 @@
             farmersList.innerHTML = '';
             
             if (filteredFarmers.length === 0) {
-                farmersList.innerHTML = '<p class="no-results">No farmers found matching your criteria</p>';
+                farmersList.innerHTML = '<p class="no-results">No matching farmers found</p>';
             } else {
                 filteredFarmers.forEach(farmer => {
                     const button = document.createElement('button');
@@ -250,8 +210,6 @@
                     farmersList.appendChild(button);
                 });
             }
-            
-            document.getElementById('filterPanel').classList.remove('active');
         }
 
         function resetFilter() {
@@ -259,18 +217,7 @@
             document.getElementById('district').value = "";
             document.getElementById('upazila').value = "";
             document.getElementById('farmersList').innerHTML = originalFarmersList;
-            document.getElementById('filterPanel').classList.remove('active');
         }
-
-        // Close filter panel when clicking outside
-        document.addEventListener('click', function(event) {
-            const filterPanel = document.getElementById('filterPanel');
-            const filterBtn = document.querySelector('.filter-btn');
-            
-            if (!filterPanel.contains(event.target) && event.target !== filterBtn) {
-                filterPanel.classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>
