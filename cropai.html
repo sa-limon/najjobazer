@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI রোগ নির্ণয় | NajjoBazer</title>
+    <style>
+        body {
+            background-color: #f5f9f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #2c5e1a;
+            font-size: 24px;
+            margin: 0 0 5px 0;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .upload-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .upload-area {
+            border: 2px dashed #d4edbf;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: #4a8c2b;
+            background-color: #f9fcf5;
+        }
+        
+        .upload-icon {
+            font-size: 40px;
+            color: #4a8c2b;
+            margin-bottom: 10px;
+        }
+        
+        .result-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: none;
+        }
+        
+        .disease-title {
+            color: #e74c3c;
+            font-size: 20px;
+            margin-top: 0;
+        }
+        
+        .disease-image {
+            width: 100%;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .symptoms, .solution {
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            color: #2c5e1a;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            background-color: #4a8c2b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #3a7c1b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #4a8c2b;
+            color: #4a8c2b;
+        }
+        
+        .btn-outline:hover {
+            background-color: #f5f9f1;
+        }
+        
+        .back-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            color: white;
+            background-color: #4a8c2b;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background-color: #3a7c1b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="20250120_044627.png" alt="NajjoBazer Logo" class="logo">
+            <h1>AI ফসল রোগ নির্ণয়</h1>
+            <p class="subtitle">ফসলের রোগ চিহ্নিত করুন এবং সমাধান পান</p>
+        </div>
+        
+        <div class="upload-card">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📁</div>
+                <p>এখানে ফসলের রোগাক্রান্ত অংশের ছবি আপলোড করুন</p>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <button class="btn" onclick="document.getElementById('fileInput').click()">ছবি নির্বাচন করুন</button>
+            </div>
+        </div>
+        
+        <div class="result-card" id="resultCard">
+            <h2 class="disease-title" id="diseaseTitle">রোগের নাম</h2>
+            <img src="" class="disease-image" id="diseaseImage">
+            
+            <div class="symptoms">
+                <h3 class="section-title">লক্ষণসমূহ</h3>
+                <p id="symptomsText">রোগের লক্ষণগুলি এখানে দেখানো হবে</p>
+            </div>
+            
+            <div class="solution">
+                <h3 class="section-title">সমাধান</h3>
+                <p id="solutionText">রোগের সমাধান এখানে দেখানো হবে</p>
+            </div>
+            
+            <button class="btn btn-outline" onclick="resetAnalyzer()">আরেকটি ছবি বিশ্লেষণ করুন</button>
+        </div>
+        
+        <button class="back-btn" onclick="window.location.href='index.html'">← হোম পেজে ফিরে যান</button>
+    </div>
+
+    <script>
+        // Disease database
+        const diseases = {
+            'tomato-blight': {
+                name: "টমেটো লেট ব্লাইট",
+                image: "https://i.imgur.com/JqYeYnW.jpg",
+                symptoms: "টমেটো গাছের পাতায় জলযুক্ত দাগ দেখা যায় যা ধীরে ধীরে বড় হয়ে বাদামী বা কালো রঙ ধারণ করে। পাতার নিচের দিকে সাদা ছত্রাক দেখা যায়। ফলেও অনিয়মিত বাদামী দাগ দেখা দেয়।",
+                solution: "১. রোগ প্রতিরোধী জাত চাষ করুন। ২. ছত্রাকনাশক যেমন ম্যানকোজেব বা ক্লোরোথালোনিল ব্যবহার করুন। ৩. ফসল আবর্তন অনুসরণ করুন। ৪. আক্রান্ত গাছ সরিয়ে ফেলুন।"
+            },
+            'rice-blast': {
+                name: "ধান ব্লাস্ট",
+                image: "https://i.imgur.com/pPQzExz.jpg",
+                symptoms: "ধান গাছের পাতায় ডিম্বাকৃতি বা গোলাকার ধূসর কেন্দ্রযুক্ত দাগ দেখা যায়। আক্রমণ তীব্র হলে পুরো পাতা শুকিয়ে যায়। গাছের গিঁটেও আক্রমণ হতে পারে।",
+                solution: "১. প্রতিরোধী জাত যেমন ব্রি ধান ৬১ বা ৮৯ চাষ করুন। ২. নাইট্রোজেন সারের পরিমাণ কমিয়ে দিন। ৩. ট্রাইসাইক্লাজল বা কার্বেন্ডাজিম গ্রুপের ছত্রাকনাশক ব্যবহার করুন।"
+            },
+            'potato-late-blight': {
+                name: "আলুর লেট ব্লাইট",
+                image: "https://i.imgur.com/8R3WQ2a.jpg",
+                symptoms: "পাতায় অনিয়মিত সবুজ-কালো দাগ দেখা যায় যা দ্রুত বড় হয়। আর্দ্র আবহাওয়ায় পাতার নিচে সাদা ছত্রাক দেখা যায়। আলুতে বাদামী দাগ ও পচন দেখা দেয়।",
+                solution: "১. রোগমুক্ত বীজ আলু ব্যবহার করুন। ২. ম্যানকোজেব বা মেটাল্যাক্সিল+ম্যানকোজেব ছত্রাকনাশক স্প্রে করুন। ৩. ফসল কাটার পর আলু ভালোভাবে শুকিয়ে নিন।"
+            },
+            'wheat-rust': {
+                name: "গমের মরিচা রোগ",
+                image: "https://i.imgur.com/LXQZqYJ.jpg",
+                symptoms: "গম গাছের পাতায় ও কাণ্ডে কমলা-বাদামী রঙের গুঁড়ার মতো দাগ দেখা যায়। আক্রমণ তীব্র হলে পুরো পাতা শুকিয়ে যায় এবং ফলন কমে যায়।",
+                solution: "১. প্রতিরোধী জাত যেমন বারি গম ৩৩ চাষ করুন। ২. টেবুকোনাজল বা প্রোপিকোনাজল গ্রুপের ছত্রাকনাশক ব্যবহার করুন। ৩. ফসল আবর্তন অনুসরণ করুন।"
+            },
+            'mango-anthracnose': {
+                name: "আমের অ্যানথ্রাকনোজ",
+                image: "https://i.imgur.com/VO3Feqy.jpg",
+                symptoms: "আমের গায়ে কালো দাগ দেখা যায় যা ধীরে ধীরে বড় হয়। পাতায় অনিয়মিত বাদামী দাগ দেখা যায়। আর্দ্র আবহাওয়ায় রোগের প্রকোপ বাড়ে।",
+                solution: "১. ফুল আসার সময় ও ফল ধারণের পর কপার অক্সিক্লোরাইড স্প্রে করুন। ২. রোগাক্রান্ত ফল ও পাতা সংগ্রহ করে পুড়ে ফেলুন। ৩. গাছের ভিতর পর্যাপ্ত আলো-বাতাস চলাচলের ব্যবস্থা করুন।"
+            }
+        };
+
+        // File input handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                // Show loading state
+                document.getElementById('diseaseTitle').textContent = "বিশ্লেষণ চলছে...";
+                document.getElementById('symptomsText').textContent = "আপনার ছবিটি বিশ্লেষণ করা হচ্ছে";
+                document.getElementById('solutionText').textContent = "";
+                document.getElementById('resultCard').style.display = 'block';
+                document.getElementById('diseaseImage').src = URL.createObjectURL(e.target.files[0]);
+                
+                // Simulate AI processing delay
+                setTimeout(function() {
+                    // For demo, randomly pick a disease
+                    const diseaseKeys = Object.keys(diseases);
+                    const randomDisease = diseaseKeys[Math.floor(Math.random() * diseaseKeys.length)];
+                    const disease = diseases[randomDisease];
+                    
+                    document.getElementById('diseaseTitle').textContent = disease.name;
+                    document.getElementById('symptomsText').textContent = disease.symptoms;
+                    document.getElementById('solutionText').textContent = disease.solution;
+                }, 2000);
+            }
+        });
+
+        // Reset analyzer
+        function resetAnalyzer() {
+            document.getElementById('fileInput').value = '';
+            document.getElementById('resultCard').style.display = 'none';
+        }
+
+        // Drag and drop functionality
+        const uploadArea = document.getElementById('uploadArea');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#4a8c2b';
+            uploadArea.style.backgroundColor = '#f9fcf5';
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#d4edbf';
+            uploadArea.style.backgroundColor = '';
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#d4edbf';
+            uploadArea.style.backgroundColor = '';
+            
+            if (e.dataTransfer.files.length > 0) {
+                document.getElementById('fileInput').files = e.dataTransfer.files;
+                // Trigger change event
+                const event = new Event('change');
+                document.getElementById('fileInput').dispatchEvent(event);
+            }
+        });
+    </script>
+</body>
+</html>
