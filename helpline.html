@@ -3,102 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helpline</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>হেল্পলাইন | NajjoBazer</title>
     <style>
         body {
-            background-color: #f5f9f1; /* Light green background */
+            background-color: #f5f9f1;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
         }
         
         .container {
-            max-width: 600px;
+            max-width: 450px;
             margin: 0 auto;
         }
         
-        form {
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #2c5e1a;
+            font-size: 24px;
+            margin: 0 0 5px 0;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .helpline-card {
             background-color: white;
             border-radius: 15px;
             padding: 20px;
+            margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .form-image {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .input-container {
-            background-color: #4a8c2b; /* Primary green */
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-        
-        .input-container h2 {
+        .emergency-banner {
+            background-color: #e74c3c;
             color: white;
-            margin: 0;
-            padding-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             text-align: center;
-            font-size: 24px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            font-weight: 600;
         }
         
-        .input-container div {
+        .contact-item {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            padding: 15px;
+            background-color: #f5f9f1;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
         }
         
-        button {
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4a8c2b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .contact-details {
+            flex: 1;
+        }
+        
+        .contact-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: #2c5e1a;
+        }
+        
+        .contact-number {
+            color: #e74c3c;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .contact-description {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .back-btn {
+            width: 100%;
             padding: 15px;
             font-size: 16px;
             color: white;
-            background-color: #5a9e3a; /* Natural green */
+            background-color: #4a8c2b;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        button:hover {
-            background-color: #4a8c2b;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        .back-btn:hover {
+            background-color: #3a7c1b;
         }
         
-        form > button {
-            width: 100%;
-            background-color: #f5a623; /* Accent orange */
+        .back-btn::before {
+            content: "←";
+            margin-right: 8px;
         }
         
-        form > button:hover {
-            background-color: #e0951a;
+        .office-hours {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <form>
-            <img src="20250120_044627.png" alt="Placeholder Image" class="form-image">
-
-            <div class="input-container">
-                <h2 style="color: white; margin: 0; padding-bottom: 10px;">Helpline</h2>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <button type="button" onclick="window.location.href='tel:16121'">ভোক্তা অধিকার সহায়তা</button>
-                    <button type="button" onclick="window.location.href='tel:+8801721196486'">কৃষি কর্মকর্তা সহায়তা</button>
-                    <button type="button" onclick="window.location.href='tel:+8801993327077'">প্রযুক্তিগত সহায়তা</button>
+        <div class="header">
+            <img src="20250120_044627.png" alt="NajjoBazer Logo" class="logo">
+            <h1>কৃষি হেল্পলাইন</h1>
+            <p class="subtitle">২৪/৭ কৃষি সহায়তা সেবা</p>
+        </div>
+        
+        <div class="emergency-banner">
+            জরুরী কৃষি সমস্যার জন্য কল করুন: ১৬১২৩
+        </div>
+        
+        <div class="helpline-card">
+            <div class="contact-item" onclick="window.location.href='tel:16123'">
+                <div class="contact-icon">📞</div>
+                <div class="contact-details">
+                    <div class="contact-title">কৃষি পরামর্শ</div>
+                    <div class="contact-number">১৬১২৩</div>
+                    <div class="contact-description">কৃষি সম্প্রসারণ অধিদপ্তর</div>
                 </div>
             </div>
             
-            <button type="button" onclick="window.location.href='index.html'">Back</button>
-        </form>
+            <div class="contact-item" onclick="window.location.href='tel:16121'">
+                <div class="contact-icon">🛒</div>
+                <div class="contact-details">
+                    <div class="contact-title">ভোক্তা অধিকার</div>
+                    <div class="contact-number">১৬১২১</div>
+                    <div class="contact-description">ভোক্তা অধিকার সংরক্ষণ অধিদপ্তর</div>
+                </div>
+            </div>
+            
+            <div class="contact-item" onclick="window.location.href='tel:+8801993327077'">
+                <div class="contact-icon">🛠️</div>
+                <div class="contact-details">
+                    <div class="contact-title">প্রযুক্তিগত সহায়তা</div>
+                    <div class="contact-number">০১৯৯৩৩২৭০৭৭</div>
+                    <div class="contact-description">NajjoBazer টেকনিক্যাল সাপোর্ট</div>
+                </div>
+            </div>
+            
+            <div class="contact-item" onclick="window.location.href='tel:3331'">
+                <div class="contact-icon">🌱</div>
+                <div class="contact-details">
+                    <div class="contact-title">সার ও বীজ</div>
+                    <div class="contact-number">৩৩৩১</div>
+                    <div class="contact-description">সার ও বীজ বিতরণ সম্পর্কিত</div>
+                </div>
+            </div>
+            
+            <div class="contact-item" onclick="window.location.href='tel:+8801711001100'">
+                <div class="contact-icon">💧</div>
+                <div class="contact-details">
+                    <div class="contact-title">সেচ সমস্যা</div>
+                    <div class="contact-number">০১৭১১০০১১০০</div>
+                    <div class="contact-description">সেচ ও পানি ব্যবস্থাপনা</div>
+                </div>
+            </div>
+            
+            <div class="contact-item" onclick="window.location.href='tel:+8801977777777'">
+                <div class="contact-icon">🐄</div>
+                <div class="contact-details">
+                    <div class="contact-title">প্রাণিসম্পদ</div>
+                    <div class="contact-number">০১৯৭৭৭৭৭৭৭৭</div>
+                    <div class="contact-description">প্রাণিসম্পদ সেবা</div>
+                </div>
+            </div>
+        </div>
+        
+        <p class="office-hours">সকাল ৮টা থেকে রাত ১০টা পর্যন্ত খোলা (শুক্রবার ও সরকারি ছুটির দিন বাদে)</p>
+        
+        <button class="back-btn" onclick="window.location.href='index.html'">হোম পেজে ফিরে যান</button>
     </div>
+
+    <script>
+        // Add click effect to contact items
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
 </body>
 </html>
