@@ -1,165 +1,46 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login/Register</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f8f8;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .language-toggle {
-      text-align: right;
-      margin-bottom: 10px;
-    }
-
-    .language-toggle button {
-      padding: 5px 10px;
-      border: none;
-      background-color: #26536c;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .role-tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .role-tabs button {
-      padding: 10px 15px;
-      border: none;
-      background-color: #7ebe5b;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .role-tabs button.active {
-      background-color: #26536c;
-    }
-
-    .form-container {
-      max-width: 400px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .form-container h2 {
-      text-align: center;
-    }
-
-    .form-container input, .form-container select {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .form-container button[type="submit"] {
-      background-color: #7ebe5b;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>লগইন | NajjoBazer</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="container">
+    <img src="assets/logo.png" class="logo" alt="Logo">
+    <h2>লগইন</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="ব্যবহারকারীর নাম" required>
+      <input type="password" id="password" placeholder="পাসওয়ার্ড" required>
+      <button type="submit">লগইন</button>
+    </form>
+    <div class="link-group">
+      <a href="register.html">নতুন রেজিস্ট্রেশন</a>
+      <a href="index.html">🏠 হোম</a>
+    </div>
+  </div>
+  <script>
+    const scriptURL = "YOUR_DEPLOYED_WEB_APP_URL"; // Replace with your own
 
-<div class="language-toggle">
-  <button onclick="toggleLanguage()">English</button>
-</div>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const url = `${scriptURL}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
-<div class="role-tabs">
-  <button class="active" onclick="switchRole('farmer')">কৃষক</button>
-  <button onclick="switchRole('middleman')">পাইকার</button>
-  <button onclick="switchRole('endseller')">খুচরা বিক্রেতা</button>
-  <button onclick="switchRole('buyer')">ক্রেতা</button>
-  <button onclick="switchRole('agent')">এজেন্ট</button>
-  <button onclick="switchRole('admin')">অ্যাডমিন</button>
-</div>
-
-<div class="form-container">
-  <form id="loginForm">
-    <h2 id="formTitle">লগইন / রেজিস্টার</h2>
-    <input type="text" placeholder="ব্যবহারকারীর নাম" id="username" required />
-    <input type="password" placeholder="পাসওয়ার্ড" id="password" required />
-    <button type="submit">সাবমিট করুন</button>
-  </form>
-</div>
-
-<script>
-  let currentLang = 'bn';
-  let roles = {
-    'farmer': { bn: 'কৃষক', en: 'Farmer' },
-    'middleman': { bn: 'পাইকার', en: 'Middleman' },
-    'endseller': { bn: 'খুচরা বিক্রেতা', en: 'End Seller' },
-    'buyer': { bn: 'ক্রেতা', en: 'Buyer' },
-    'agent': { bn: 'এজেন্ট', en: 'Agent' },
-    'admin': { bn: 'অ্যাডমিন', en: 'Admin' }
-  };
-
-  function toggleLanguage() {
-    currentLang = currentLang === 'bn' ? 'en' : 'bn';
-    document.querySelector('.language-toggle button').innerText = currentLang === 'bn' ? 'English' : 'বাংলা';
-    updateLanguage();
-  }
-
-  function updateLanguage() {
-    const buttons = document.querySelectorAll('.role-tabs button');
-    let i = 0;
-    for (let role in roles) {
-      buttons[i].innerText = roles[role][currentLang];
-      i++;
-    }
-
-    document.getElementById('formTitle').innerText = currentLang === 'bn' ? 'লগইন / রেজিস্টার' : 'Login / Register';
-    document.getElementById('username').placeholder = currentLang === 'bn' ? 'ব্যবহারকারীর নাম' : 'Username';
-    document.getElementById('password').placeholder = currentLang === 'bn' ? 'পাসওয়ার্ড' : 'Password';
-    document.querySelector('button[type="submit"]').innerText = currentLang === 'bn' ? 'সাবমিট করুন' : 'Submit';
-  }
-
-  function switchRole(roleKey) {
-    const buttons = document.querySelectorAll('.role-tabs button');
-    buttons.forEach(btn => btn.classList.remove('active'));
-
-    const roleKeys = Object.keys(roles);
-    const index = roleKeys.indexOf(roleKey);
-    if (index !== -1) {
-      buttons[index].classList.add('active');
-    }
-
-    // You can store roleKey for submission later if needed
-    console.log("Selected Role:", roleKey);
-  }
-
-  // Prevent form default for now
-  document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert(currentLang === 'bn' ? 'লগইন সফল হয়েছে!' : 'Login successful!');
-  });
-</script>
-
+      fetch(url)
+        .then(res => res.text())
+        .then(response => {
+          if (response === "success") {
+            alert("লগইন সফল!");
+            window.location.href = "dashboard.html"; // Or based on user role
+          } else {
+            alert("ভুল ব্যবহারকারীর নাম বা পাসওয়ার্ড!");
+          }
+        })
+        .catch(err => alert("সার্ভারে ত্রুটি হয়েছে!"));
+    });
+  </script>
 </body>
 </html>
