@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>কৃষি আবহাওয়া | NajjoBazer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f9f1;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #2c5e1a;
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .update-time {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .location-selector {
+            margin-bottom: 20px;
+        }
+        
+        .location-selector select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d4edbf;
+            border-radius: 8px;
+            background-color: white;
+            font-size: 14px;
+        }
+        
+        .weather-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .current-weather {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-bottom: 15px;
+        }
+        
+        .temperature {
+            font-size: 48px;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        .weather-icon {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .weather-desc {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            background-color: #f5f9f1;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        
+        .detail-item span {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #2c5e1a;
+        }
+        
+        .forecast {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 10px;
+            margin-top: 15px;
+        }
+        
+        .forecast-item {
+            min-width: 80px;
+            background-color: #f5f9f1;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .forecast-day {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .forecast-icon {
+            width: 40px;
+            height: 40px;
+            margin: 5px auto;
+        }
+        
+        .forecast-temp {
+            font-size: 12px;
+        }
+        
+        .agri-alert {
+            background-color: #fff8e6;
+            border-left: 4px solid #f5a623;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+        
+        .agri-alert h3 {
+            margin-top: 0;
+            color: #e0951a;
+        }
+        
+        .back-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            background-color: #4a8c2b;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #3a7c1b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="20250120_044627.png" alt="NajjoBazer Logo" class="logo">
+            <h1>কৃষি আবহাওয়া</h1>
+            <div class="update-time" id="updateTime">আপডেট: লোড হচ্ছে...</div>
+        </div>
+        
+        <div class="location-selector">
+            <select id="locationSelect" onchange="updateWeather()">
+                <option value="dhaka">ঢাকা</option>
+                <option value="chittagong">চট্টগ্রাম</option>
+                <option value="khulna">খুলনা</option>
+                <option value="rajshahi">রাজশাহী</option>
+                <option value="sylhet">সিলেট</option>
+                <option value="barisal">বরিশাল</option>
+                <option value="rangpur">রংপুর</option>
+                <option value="mymensingh">ময়মনসিংহ</option>
+            </select>
+        </div>
+        
+        <div class="weather-card">
+            <div class="current-weather">
+                <div>
+                    <div class="temperature" id="currentTemp">--°C</div>
+                    <div class="weather-desc" id="weatherDesc">লোড হচ্ছে...</div>
+                </div>
+                <img id="weatherIcon" class="weather-icon" src="https://cdn-icons-png.flaticon.com/512/1146/1146869.png" alt="Weather icon">
+            </div>
+            
+            <div class="weather-details">
+                <div class="detail-item">
+                    আর্দ্রতা <span id="humidity">--%</span>
+                </div>
+                <div class="detail-item">
+                    বাতাস <span id="wind">-- km/h</span>
+                </div>
+                <div class="detail-item">
+                    বৃষ্টির সম্ভাবনা <span id="precip">--%</span>
+                </div>
+                <div class="detail-item">
+                    চাপ <span id="pressure">-- hPa</span>
+                </div>
+            </div>
+            
+            <div class="forecast" id="forecastContainer">
+                <!-- Forecast items will be added here by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="agri-alert">
+            <h3>কৃষি পরামর্শ</h3>
+            <p id="agriAdvice">আবহাওয়া ডেটা লোড হওয়ার পরে কৃষি পরামর্শ দেখানো হবে...</p>
+        </div>
+        
+        <button class="back-btn" onclick="window.location.href='index.html'">← হোম পেজে ফিরে যান</button>
+    </div>
+
+    <script>
+        // Weather data for different regions (simulated)
+        const weatherData = {
+            dhaka: {
+                temp: 32,
+                desc: "আংশিক মেঘলা",
+                humidity: 68,
+                wind: 12,
+                precip: 20,
+                pressure: 1012,
+                icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png",
+                forecast: [
+                    { day: "আজ", temp: "32/28", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" },
+                    { day: "কাল", temp: "33/27", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" },
+                    { day: "পরশু", temp: "31/26", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png" },
+                    { day: "মঙ্গল", temp: "30/25", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png" },
+                    { day: "বুধ", temp: "29/24", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" }
+                ],
+                advice: "বর্তমান আবহাওয়া ধান শুকানোর জন্য উপযুক্ত। বৃষ্টির সম্ভাবনা থাকায় শস্য ঢেকে রাখুন।"
+            },
+            chittagong: {
+                temp: 29,
+                desc: "হালকা বৃষ্টি",
+                humidity: 82,
+                wind: 15,
+                precip: 60,
+                pressure: 1010,
+                icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png",
+                forecast: [
+                    { day: "আজ", temp: "29/26", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png" },
+                    { day: "কাল", temp: "28/25", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png" },
+                    { day: "পরশু", temp: "30/26", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" },
+                    { day: "মঙ্গল", temp: "31/27", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" },
+                    { day: "বুধ", temp: "32/27", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" }
+                ],
+                advice: "অধিক আর্দ্রতার কারণে ফসলের রোগবালাইয়ের ঝুঁকি রয়েছে। প্রয়োজনীয় প্রতিরোধমূলক ব্যবস্থা নিন।"
+            },
+            khulna: {
+                temp: 34,
+                desc: "রৌদ্রোজ্জ্বল",
+                humidity: 58,
+                wind: 10,
+                precip: 5,
+                pressure: 1011,
+                icon: "https://cdn-icons-png.flaticon.com/512/869/869869.png",
+                forecast: [
+                    { day: "আজ", temp: "34/28", icon: "https://cdn-icons-png.flaticon.com/512/869/869869.png" },
+                    { day: "কাল", temp: "35/28", icon: "https://cdn-icons-png.flaticon.com/512/869/869869.png" },
+                    { day: "পরশু", temp: "34/27", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" },
+                    { day: "মঙ্গল", temp: "33/27", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" },
+                    { day: "বুধ", temp: "32/26", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" }
+                ],
+                advice: "উচ্চ তাপমাত্রার কারণে সেচের ব্যবস্থা বাড়ান। দিনের মধ্যভাগে কৃষিকাজ এড়িয়ে চলুন।"
+            }
+            // Data for other regions would continue here...
+        };
+
+        // Set current date and time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            const dateStr = now.toLocaleDateString('bn-BD', options);
+            document.getElementById('updateTime').textContent = `আপডেট: ${dateStr}`;
+        }
+
+        // Update weather display
+        function updateWeather() {
+            const location = document.getElementById('locationSelect').value;
+            const data = weatherData[location] || weatherData.dhaka;
+            
+            document.getElementById('currentTemp').textContent = `${data.temp}°C`;
+            document.getElementById('weatherDesc').textContent = data.desc;
+            document.getElementById('humidity').textContent = `${data.humidity}%`;
+            document.getElementById('wind').textContent = `${data.wind} km/h`;
+            document.getElementById('precip').textContent = `${data.precip}%`;
+            document.getElementById('pressure').textContent = `${data.pressure} hPa`;
+            document.getElementById('weatherIcon').src = data.icon;
+            document.getElementById('agriAdvice').textContent = data.advice;
+            
+            // Update forecast
+            const forecastContainer = document.getElementById('forecastContainer');
+            forecastContainer.innerHTML = '';
+            
+            data.forecast.forEach(item => {
+                const forecastItem = document.createElement('div');
+                forecastItem.className = 'forecast-item';
+                forecastItem.innerHTML = `
+                    <div class="forecast-day">${item.day}</div>
+                    <img class="forecast-icon" src="${item.icon}" alt="Weather">
+                    <div class="forecast-temp">${item.temp}°C</div>
+                `;
+                forecastContainer.appendChild(forecastItem);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDateTime();
+            updateWeather();
+            
+            // Update time every minute
+            setInterval(updateDateTime, 60000);
+        });
+    </script>
+</body>
+</html>
