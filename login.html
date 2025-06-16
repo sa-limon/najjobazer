@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>লগইন - NajjoBazer</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            margin: 0; padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 350px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        h2 {
+            text-align: center;
+            color: #bf592b;
+            margin-bottom: 20px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 8px 5px;
+            font-size: 14px;
+            background-color: #bf592b;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .tab-btn.active {
+            background-color: #7ebe5b;
+            font-weight: bold;
+        }
+        form {
+            display: none;
+            flex-direction: column;
+        }
+        form.active {
+            display: flex;
+        }
+        label {
+            margin: 8px 0 4px 0;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        button.submit-btn {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #bf592b;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .lang-toggle {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .lang-toggle button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            color: #26536c;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lang-toggle">
+            ভাষা:
+            <button id="btn-bn" class="active">বাংলা</button>
+            <button id="btn-en">English</button>
+        </div>
+        <h2 id="title">লগইন</h2>
+        <div class="tabs" role="tablist" aria-label="User roles">
+            <button class="tab-btn active" data-role="farmer" aria-selected="true">কৃষক</button>
+            <button class="tab-btn" data-role="middleman">মধ্যস্বত্বভোগী</button>
+            <button class="tab-btn" data-role="endseller">শেষ বিক্রেতা</button>
+            <button class="tab-btn" data-role="buyer">ক্রেতা</button>
+            <button class="tab-btn" data-role="agent">এজেন্ট</button>
+            <button class="tab-btn" data-role="admin">অ্যাডমিন</button>
+        </div>
+
+        <!-- Farmer Login -->
+        <form id="form-farmer" class="active" novalidate>
+            <label for="farmer-username" data-bn="ইউজারনেম" data-en="Username">ইউজারনেম</label>
+            <input type="text" id="farmer-username" name="farmer-username" required placeholder="ইউজারনেম লিখুন" />
+            <label for="farmer-password" data-bn="পাসওয়ার্ড" data-en="Password">পাসওয়ার্ড</label>
+            <input type="password" id="farmer-password" name="farmer-password" required placeholder="পাসওয়ার্ড লিখুন" />
+            <button type="submit" class="submit-btn" data-bn="লগইন" data-en="Login">লগইন</button>
+        </form>
+
+        <!-- Middleman Login -->
+        <form id="form-middleman" novalidate>
+            <label for="middleman-username" data-bn="ইউজারনেম" data-en="Username">ইউজারনেম</label>
+            <input type="text" id="middleman-username" name="middleman-username" required placeholder="ইউজারনেম লিখুন" />
+            <label for="middleman-password" data-bn="পাসওয়ার্ড" data-en="Password">পাসওয়ার্ড</label>
+            <input type="password" id="middleman-password" name="middleman-password" required placeholder="পাসওয়ার্ড লিখুন" />
+            <button type="submit" class="submit-btn" data-bn="লগইন" data-en="Login">লগইন</button>
+        </form>
+
+        <!-- End Seller Login -->
+        <form id="form-endseller" novalidate>
+            <label for="endseller-username" data-bn="ইউজারনেম" data-en="Username">ইউজারনেম</label>
+            <input type="text" id="endseller-username" name="endseller-username" required placeholder="ইউজারনেম লিখুন" />
+            <label for="endseller-password" data-bn="পাসওয়ার্ড" data-en="Password">পাসওয়ার্ড</label>
+            <input type="password" id="endseller-password" name="endseller-password" required placeholder="পাসওয়ার্ড লিখুন" />
+            <button type="submit" class="submit-btn" data-bn="লগইন" data-en="Login">লগইন</button>
+        </form>
+
+        <!-- Buyer Login -->
+        <form id="form-buyer" novalidate>
+            <label for="buyer-username" data-bn="ইউজারনেম" data-en="Username">ইউজারনেম</label>
+            <input type="text" id="buyer-username" name="buyer-username" required placeholder="ইউজারনেম লিখুন" />
+            <label for="buyer-password" data-bn="পাসওয়ার্ড" data-en="Password">পাসওয়ার্ড</label>
+            <input type="password" id="buyer-password" name="buyer-password" required placeholder="পাসওয়ার্ড লিখুন" />
+            <button type="submit" class="submit-btn" data-bn="লগইন" data-en="Login">লগইন</button>
+        </form>
+
+        <!-- Agent Login -->
+        <form id="form-agent" novalidate>
+            <label for="agent-username" data-bn="ইউজারনেম" data-en="Username">ইউজারনেম</label>
+            <input type="text" id="agent-username" name="agent-username" required placeholder="ইউজারনেম লিখুন" />
+            <label for="agent-password" data-bn="পাসওয়ার্ড" data-en="Password">পাসওয়ার্ড</label>
+            <input type="password" id="agent-password" name="agent-password" required placeholder="পাসওয়ার্ড লিখুন" />
+            <button type="submit" class="submit-btn" data-bn="লগইন" data-en="Login">লগইন</button>
+        </form>
+
+        <!-- Admin Login -->
+        <form id="form-admin" novalidate>
+            <label for="admin-username" data-bn="ইউজারনেম" data-en="Username">ইউজারনেম</label>
+            <input type="text" id="admin-username" name="admin-username" required placeholder="ইউজারনেম লিখুন" />
+            <label for="admin-password" data-bn="পাসওয়ার্ড" data-en="Password">পাসওয়ার্ড</label>
+            <input type="password" id="admin-password" name="admin-password" required placeholder="পাসওয়ার্ড লিখুন" />
+            <button type="submit" class="submit-btn" data-bn="লগইন" data-en="Login">লগইন</button>
+        </form>
+    </div>
+
+<script>
+    // Role tab switching
+    const tabs = document.querySelectorAll('.tab-btn');
+    const forms = document.querySelectorAll('form');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+
+            const role = tab.getAttribute('data-role');
+            forms.forEach(f => {
+                if (f.id === 'form-' + role) {
+                    f.classList.add('active');
+                } else {
+                    f.classList.remove('active');
+                }
+            });
+        });
+    });
+
+    // Language toggle
+    const btnBn = document.getElementById('btn-bn');
+    const btnEn = document.getElementById('btn-en');
+    const elementsToTranslate = document.querySelectorAll('[data-bn]');
+    
+    function setLanguage(lang) {
+        elementsToTranslate.forEach(el => {
+            el.textContent = el.getAttribute('data-' + lang);
+            // Adjust placeholders for inputs
+            if (el.tagName === 'INPUT') {
+                if(el.hasAttribute('placeholder')) {
+                    el.placeholder = el.getAttribute('data-' + lang);
+                }
+            }
+        });
+    }
+
+    btnBn.addEventListener('click', () => {
+        btnBn.classList.add('active');
+        btnEn.classList.remove('active');
+        document.documentElement.lang = 'bn';
+        // Change all translatable text to Bengali
+        elementsToTranslate.forEach(el => {
+            if (el.tagName === 'INPUT') {
+                if(el.hasAttribute('placeholder')) {
+                    el.placeholder = el.getAttribute('data-bn');
+                }
+            } else {
+                el.textContent = el.getAttribute('data-bn');
+            }
+        });
+    });
+
