@@ -144,6 +144,21 @@
         .back-btn:hover {
             background-color: #3a7c1b;
         }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -184,35 +199,35 @@
     </div>
 
     <script>
-        // Disease database
+        // Disease database with image name mapping
         const diseases = {
             'tomato-blight': {
                 name: "টমেটো লেট ব্লাইট",
-                image: "tomato-bight.webp",
+                imageNames: ['tomato', 'blight', 'tomato-blight', 'tomato-bight'],
                 symptoms: "টমেটো গাছের পাতায় জলযুক্ত দাগ দেখা যায় যা ধীরে ধীরে বড় হয়ে বাদামী বা কালো রঙ ধারণ করে। পাতার নিচের দিকে সাদা ছত্রাক দেখা যায়। ফলেও অনিয়মিত বাদামী দাগ দেখা দেয়।",
                 solution: "১. রোগ প্রতিরোধী জাত চাষ করুন। ২. ছত্রাকনাশক যেমন ম্যানকোজেব বা ক্লোরোথালোনিল ব্যবহার করুন। ৩. ফসল আবর্তন অনুসরণ করুন। ৪. আক্রান্ত গাছ সরিয়ে ফেলুন।"
             },
             'rice-blast': {
                 name: "ধান ব্লাস্ট",
-                image: "rice-blast.jpg",
+                imageNames: ['rice', 'blast', 'rice-blast', 'ধান'],
                 symptoms: "ধান গাছের পাতায় ডিম্বাকৃতি বা গোলাকার ধূসর কেন্দ্রযুক্ত দাগ দেখা যায়। আক্রমণ তীব্র হলে পুরো পাতা শুকিয়ে যায়। গাছের গিঁটেও আক্রমণ হতে পারে।",
                 solution: "১. প্রতিরোধী জাত যেমন ব্রি ধান ৬১ বা ৮৯ চাষ করুন। ২. নাইট্রোজেন সারের পরিমাণ কমিয়ে দিন। ৩. ট্রাইসাইক্লাজল বা কার্বেন্ডাজিম গ্রুপের ছত্রাকনাশক ব্যবহার করুন।"
             },
             'potato-late-blight': {
                 name: "আলুর লেট ব্লাইট",
-                image: "potato-late-blight.jpeg",
+                imageNames: ['potato', 'blight', 'potato-blight', 'potato-late-blight', 'আলু'],
                 symptoms: "পাতায় অনিয়মিত সবুজ-কালো দাগ দেখা যায় যা দ্রুত বড় হয়। আর্দ্র আবহাওয়ায় পাতার নিচে সাদা ছত্রাক দেখা যায়। আলুতে বাদামী দাগ ও পচন দেখা দেয়।",
                 solution: "১. রোগমুক্ত বীজ আলু ব্যবহার করুন। ২. ম্যানকোজেব বা মেটাল্যাক্সিল+ম্যানকোজেব ছত্রাকনাশক স্প্রে করুন। ৩. ফসল কাটার পর আলু ভালোভাবে শুকিয়ে নিন।"
             },
             'wheat-rust': {
                 name: "গমের মরিচা রোগ",
-                image: "wheat-rust.jpeg",
+                imageNames: ['wheat', 'rust', 'wheat-rust', 'গম'],
                 symptoms: "গম গাছের পাতায় ও কাণ্ডে কমলা-বাদামী রঙের গুঁড়ার মতো দাগ দেখা যায়। আক্রমণ তীব্র হলে পুরো পাতা শুকিয়ে যায় এবং ফলন কমে যায়।",
                 solution: "১. প্রতিরোধী জাত যেমন বারি গম ৩৩ চাষ করুন। ২. টেবুকোনাজল বা প্রোপিকোনাজল গ্রুপের ছত্রাকনাশক ব্যবহার করুন। ৩. ফসল আবর্তন অনুসরণ করুন।"
             },
             'mango-anthracnose': {
                 name: "আমের অ্যানথ্রাকনোজ",
-                image: "mango-an.jpg",
+                imageNames: ['mango', 'anthracnose', 'mango-anthracnose', 'mango-an', 'আম'],
                 symptoms: "আমের গায়ে কালো দাগ দেখা যায় যা ধীরে ধীরে বড় হয়। পাতায় অনিয়মিত বাদামী দাগ দেখা যায়। আর্দ্র আবহাওয়ায় রোগের প্রকোপ বাড়ে।",
                 solution: "১. ফুল আসার সময় ও ফল ধারণের পর কপার অক্সিক্লোরাইড স্প্রে করুন। ২. রোগাক্রান্ত ফল ও পাতা সংগ্রহ করে পুড়ে ফেলুন। ৩. গাছের ভিতর পর্যাপ্ত আলো-বাতাস চলাচলের ব্যবস্থা করুন।"
             }
@@ -221,26 +236,59 @@
         // File input handler
         document.getElementById('fileInput').addEventListener('change', function(e) {
             if (e.target.files.length > 0) {
-                // Show loading state
-                document.getElementById('diseaseTitle').textContent = "বিশ্লেষণ চলছে...";
-                document.getElementById('symptomsText').textContent = "আপনার ছবিটি বিশ্লেষণ করা হচ্ছে";
-                document.getElementById('solutionText').textContent = "";
-                document.getElementById('resultCard').style.display = 'block';
-                document.getElementById('diseaseImage').src = URL.createObjectURL(e.target.files[0]);
+                const file = e.target.files[0];
+                const reader = new FileReader();
                 
-                // Simulate AI processing delay
-                setTimeout(function() {
-                    // For demo, randomly pick a disease
-                    const diseaseKeys = Object.keys(diseases);
-                    const randomDisease = diseaseKeys[Math.floor(Math.random() * diseaseKeys.length)];
-                    const disease = diseases[randomDisease];
+                reader.onload = function(event) {
+                    // Show loading state
+                    document.getElementById('diseaseTitle').innerHTML = '<span class="loading"></span> বিশ্লেষণ চলছে...';
+                    document.getElementById('symptomsText').textContent = "আপনার ছবিটি বিশ্লেষণ করা হচ্ছে";
+                    document.getElementById('solutionText').textContent = "";
+                    document.getElementById('resultCard').style.display = 'block';
+                    document.getElementById('diseaseImage').src = event.target.result;
                     
-                    document.getElementById('diseaseTitle').textContent = disease.name;
-                    document.getElementById('symptomsText').textContent = disease.symptoms;
-                    document.getElementById('solutionText').textContent = disease.solution;
-                }, 2000);
+                    // Simulate AI processing with image name matching
+                    setTimeout(function() {
+                        detectDiseaseFromFileName(file.name);
+                    }, 1500);
+                }
+                reader.readAsDataURL(file);
             }
         });
+
+        // Detect disease from file name
+        function detectDiseaseFromFileName(filename) {
+            // Convert filename to lowercase for case-insensitive matching
+            const lowerFilename = filename.toLowerCase();
+            
+            // Find matching disease
+            let matchedDisease = null;
+            
+            for (const diseaseId in diseases) {
+                const disease = diseases[diseaseId];
+                for (const keyword of disease.imageNames) {
+                    if (lowerFilename.includes(keyword)) {
+                        matchedDisease = disease;
+                        break;
+                    }
+                }
+                if (matchedDisease) break;
+            }
+            
+            // If no match found, use a default or show error
+            if (!matchedDisease) {
+                matchedDisease = {
+                    name: "রোগ সনাক্ত করা যায়নি",
+                    symptoms: "আমরা আপনার আপলোড করা ছবি থেকে রোগ সনাক্ত করতে পারিনি। অনুগ্রহ করে নিশ্চিত করুন যে ছবিটি স্পষ্ট এবং ফসলের রোগাক্রান্ত অংশ দেখাচ্ছে।",
+                    solution: "আপনি আমাদের হেল্পলাইনে যোগাযোগ করতে পারেন অথবা আরও একটি ছবি আপলোড করে চেষ্টা করতে পারেন।"
+                };
+            }
+            
+            // Display results
+            document.getElementById('diseaseTitle').textContent = matchedDisease.name;
+            document.getElementById('symptomsText').textContent = matchedDisease.symptoms;
+            document.getElementById('solutionText').textContent = matchedDisease.solution;
+        }
 
         // Reset analyzer
         function resetAnalyzer() {
