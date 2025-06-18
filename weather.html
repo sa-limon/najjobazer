@@ -171,6 +171,12 @@
         .back-btn:hover {
             background-color: #3a7c1b;
         }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -183,43 +189,46 @@
         
         <div class="location-selector">
             <select id="locationSelect" onchange="updateWeather()">
-                <option value="dhaka">ঢাকা</option>
-                <option value="chittagong">চট্টগ্রাম</option>
-                <option value="khulna">খুলনা</option>
-                <option value="rajshahi">রাজশাহী</option>
-                <option value="sylhet">সিলেট</option>
-                <option value="barisal">বরিশাল</option>
-                <option value="rangpur">রংপুর</option>
-                <option value="mymensingh">ময়মনসিংহ</option>
+                <option value="Dhaka">ঢাকা</option>
+                <option value="Chittagong">চট্টগ্রাম</option>
+                <option value="Khulna">খুলনা</option>
+                <option value="Rajshahi">রাজশাহী</option>
+                <option value="Sylhet">সিলেট</option>
+                <option value="Barisal">বরিশাল</option>
+                <option value="Rangpur">রংপুর</option>
+                <option value="Mymensingh">ময়মনসিংহ</option>
             </select>
         </div>
         
         <div class="weather-card">
-            <div class="current-weather">
-                <div>
-                    <div class="temperature" id="currentTemp">--°C</div>
-                    <div class="weather-desc" id="weatherDesc">লোড হচ্ছে...</div>
+            <div id="weatherLoading" class="loading">আবহাওয়া তথ্য লোড হচ্ছে...</div>
+            <div id="weatherContent" style="display: none;">
+                <div class="current-weather">
+                    <div>
+                        <div class="temperature" id="currentTemp">--°C</div>
+                        <div class="weather-desc" id="weatherDesc">লোড হচ্ছে...</div>
+                    </div>
+                    <img id="weatherIcon" class="weather-icon" src="https://cdn-icons-png.flaticon.com/512/1146/1146869.png" alt="Weather icon">
                 </div>
-                <img id="weatherIcon" class="weather-icon" src="https://cdn-icons-png.flaticon.com/512/1146/1146869.png" alt="Weather icon">
-            </div>
-            
-            <div class="weather-details">
-                <div class="detail-item">
-                    আর্দ্রতা <span id="humidity">--%</span>
+                
+                <div class="weather-details">
+                    <div class="detail-item">
+                        আর্দ্রতা <span id="humidity">--%</span>
+                    </div>
+                    <div class="detail-item">
+                        বাতাস <span id="wind">-- km/h</span>
+                    </div>
+                    <div class="detail-item">
+                        বৃষ্টির সম্ভাবনা <span id="precip">--%</span>
+                    </div>
+                    <div class="detail-item">
+                        চাপ <span id="pressure">-- hPa</span>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    বাতাস <span id="wind">-- km/h</span>
+                
+                <div class="forecast" id="forecastContainer">
+                    <!-- Forecast items will be added here by JavaScript -->
                 </div>
-                <div class="detail-item">
-                    বৃষ্টির সম্ভাবনা <span id="precip">--%</span>
-                </div>
-                <div class="detail-item">
-                    চাপ <span id="pressure">-- hPa</span>
-                </div>
-            </div>
-            
-            <div class="forecast" id="forecastContainer">
-                <!-- Forecast items will be added here by JavaScript -->
             </div>
         </div>
         
@@ -232,60 +241,21 @@
     </div>
 
     <script>
-        // Weather data for different regions (simulated)
-        const weatherData = {
-            dhaka: {
-                temp: 32,
-                desc: "আংশিক মেঘলা",
-                humidity: 68,
-                wind: 12,
-                precip: 20,
-                pressure: 1012,
-                icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png",
-                forecast: [
-                    { day: "আজ", temp: "32/28", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" },
-                    { day: "কাল", temp: "33/27", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" },
-                    { day: "পরশু", temp: "31/26", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png" },
-                    { day: "মঙ্গল", temp: "30/25", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png" },
-                    { day: "বুধ", temp: "29/24", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" }
-                ],
-                advice: "বর্তমান আবহাওয়া ধান শুকানোর জন্য উপযুক্ত। বৃষ্টির সম্ভাবনা থাকায় শস্য ঢেকে রাখুন।"
-            },
-            chittagong: {
-                temp: 29,
-                desc: "হালকা বৃষ্টি",
-                humidity: 82,
-                wind: 15,
-                precip: 60,
-                pressure: 1010,
-                icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png",
-                forecast: [
-                    { day: "আজ", temp: "29/26", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png" },
-                    { day: "কাল", temp: "28/25", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146911.png" },
-                    { day: "পরশু", temp: "30/26", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" },
-                    { day: "মঙ্গল", temp: "31/27", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" },
-                    { day: "বুধ", temp: "32/27", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" }
-                ],
-                advice: "অধিক আর্দ্রতার কারণে ফসলের রোগবালাইয়ের ঝুঁকি রয়েছে। প্রয়োজনীয় প্রতিরোধমূলক ব্যবস্থা নিন।"
-            },
-            khulna: {
-                temp: 34,
-                desc: "রৌদ্রোজ্জ্বল",
-                humidity: 58,
-                wind: 10,
-                precip: 5,
-                pressure: 1011,
-                icon: "https://cdn-icons-png.flaticon.com/512/869/869869.png",
-                forecast: [
-                    { day: "আজ", temp: "34/28", icon: "https://cdn-icons-png.flaticon.com/512/869/869869.png" },
-                    { day: "কাল", temp: "35/28", icon: "https://cdn-icons-png.flaticon.com/512/869/869869.png" },
-                    { day: "পরশু", temp: "34/27", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" },
-                    { day: "মঙ্গল", temp: "33/27", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" },
-                    { day: "বুধ", temp: "32/26", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" }
-                ],
-                advice: "উচ্চ তাপমাত্রার কারণে সেচের ব্যবস্থা বাড়ান। দিনের মধ্যভাগে কৃষিকাজ এড়িয়ে চলুন।"
-            }
-            // Data for other regions would continue here...
+        // API configuration
+        const API_KEY = "f7bc68c3afc6c231d68d08e49dbb8ba5"; // Your OpenWeatherMap API key
+        const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
+        const FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
+        
+        // City to coordinates mapping for Bangladesh divisions
+        const cityCoordinates = {
+            "Dhaka": { lat: 23.8103, lon: 90.4125 },
+            "Chittagong": { lat: 22.3569, lon: 91.7832 },
+            "Khulna": { lat: 22.8456, lon: 89.5403 },
+            "Rajshahi": { lat: 24.3745, lon: 88.6042 },
+            "Sylhet": { lat: 24.8949, lon: 91.8687 },
+            "Barisal": { lat: 22.7010, lon: 90.3535 },
+            "Rangpur": { lat: 25.7439, lon: 89.2752 },
+            "Mymensingh": { lat: 24.7471, lon: 90.4203 }
         };
 
         // Set current date and time
@@ -303,34 +273,113 @@
             document.getElementById('updateTime').textContent = `আপডেট: ${dateStr}`;
         }
 
+        // Get weather icon URL
+        function getWeatherIconUrl(iconCode) {
+            return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+        }
+
+        // Get agricultural advice based on weather
+        function getAgriculturalAdvice(weatherData) {
+            const temp = weatherData.main.temp;
+            const humidity = weatherData.main.humidity;
+            const rain = weatherData.rain ? weatherData.rain["1h"] || 0 : 0;
+            
+            if (rain > 10) {
+                return "ভারী বৃষ্টির সম্ভাবনা রয়েছে। ফসল সুরক্ষার জন্য প্রয়োজনীয় ব্যবস্থা নিন এবং জলাবদ্ধতা এড়াতে নিকাশী ব্যবস্থা পরীক্ষা করুন।";
+            } else if (temp > 35 && humidity > 70) {
+                return "উচ্চ তাপমাত্রা এবং আর্দ্রতা ফসলের জন্য চাপ সৃষ্টি করতে পারে। নিয়মিত সেচ দিন এবং রোগবালাই নিয়ন্ত্রণে রাখুন।";
+            } else if (temp < 15) {
+                return "তাপমাত্রা কম থাকায় শীতকালীন ফসলের যত্ন নিন। ঠান্ডা থেকে গাছপালা রক্ষা করুন।";
+            } else if (humidity < 40) {
+                return "বাতাস শুষ্ক থাকায় সেচের পরিমাণ বাড়ান। মাটির আর্দ্রতা বজায় রাখুন।";
+            } else {
+                return "বর্তমান আবহাওয়া কৃষিকাজের জন্য অনুকূল। স্বাভাবিক কৃষিকাজ চালিয়ে যেতে পারেন।";
+            }
+        }
+
+        // Fetch current weather
+        async function fetchCurrentWeather(city) {
+            const { lat, lon } = cityCoordinates[city];
+            const url = `${BASE_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=bn`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Network response was not ok");
+                return await response.json();
+            } catch (error) {
+                console.error("Error fetching current weather:", error);
+                return null;
+            }
+        }
+
+        // Fetch weather forecast
+        async function fetchWeatherForecast(city) {
+            const { lat, lon } = cityCoordinates[city];
+            const url = `${FORECAST_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=bn&cnt=5`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Network response was not ok");
+                const data = await response.json();
+                return data.list;
+            } catch (error) {
+                console.error("Error fetching forecast:", error);
+                return null;
+            }
+        }
+
         // Update weather display
-        function updateWeather() {
-            const location = document.getElementById('locationSelect').value;
-            const data = weatherData[location] || weatherData.dhaka;
+        async function updateWeather() {
+            const city = document.getElementById('locationSelect').value;
             
-            document.getElementById('currentTemp').textContent = `${data.temp}°C`;
-            document.getElementById('weatherDesc').textContent = data.desc;
-            document.getElementById('humidity').textContent = `${data.humidity}%`;
-            document.getElementById('wind').textContent = `${data.wind} km/h`;
-            document.getElementById('precip').textContent = `${data.precip}%`;
-            document.getElementById('pressure').textContent = `${data.pressure} hPa`;
-            document.getElementById('weatherIcon').src = data.icon;
-            document.getElementById('agriAdvice').textContent = data.advice;
+            // Show loading state
+            document.getElementById('weatherLoading').style.display = 'block';
+            document.getElementById('weatherContent').style.display = 'none';
             
-            // Update forecast
-            const forecastContainer = document.getElementById('forecastContainer');
-            forecastContainer.innerHTML = '';
+            // Fetch data
+            const currentWeather = await fetchCurrentWeather(city);
+            const forecast = await fetchWeatherForecast(city);
             
-            data.forecast.forEach(item => {
-                const forecastItem = document.createElement('div');
-                forecastItem.className = 'forecast-item';
-                forecastItem.innerHTML = `
-                    <div class="forecast-day">${item.day}</div>
-                    <img class="forecast-icon" src="${item.icon}" alt="Weather">
-                    <div class="forecast-temp">${item.temp}°C</div>
-                `;
-                forecastContainer.appendChild(forecastItem);
-            });
+            if (currentWeather && forecast) {
+                // Update current weather
+                document.getElementById('currentTemp').textContent = `${Math.round(currentWeather.main.temp)}°C`;
+                document.getElementById('weatherDesc').textContent = currentWeather.weather[0].description;
+                document.getElementById('humidity').textContent = `${currentWeather.main.humidity}%`;
+                document.getElementById('wind').textContent = `${Math.round(currentWeather.wind.speed * 3.6)} km/h`;
+                document.getElementById('precip').textContent = currentWeather.rain ? `${currentWeather.rain["1h"] || 0}%` : "0%";
+                document.getElementById('pressure').textContent = `${currentWeather.main.pressure} hPa`;
+                document.getElementById('weatherIcon').src = getWeatherIconUrl(currentWeather.weather[0].icon);
+                
+                // Update agricultural advice
+                document.getElementById('agriAdvice').textContent = getAgriculturalAdvice(currentWeather);
+                
+                // Update forecast
+                const forecastContainer = document.getElementById('forecastContainer');
+                forecastContainer.innerHTML = '';
+                
+                const days = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহস্পতি', 'শুক্র', 'শনি'];
+                const today = new Date().getDay();
+                
+                forecast.forEach((item, index) => {
+                    const forecastDate = new Date(item.dt * 1000);
+                    const dayName = days[(today + index) % 7];
+                    
+                    const forecastItem = document.createElement('div');
+                    forecastItem.className = 'forecast-item';
+                    forecastItem.innerHTML = `
+                        <div class="forecast-day">${dayName}</div>
+                        <img class="forecast-icon" src="${getWeatherIconUrl(item.weather[0].icon)}" alt="Weather">
+                        <div class="forecast-temp">${Math.round(item.main.temp_max)}/${Math.round(item.main.temp_min)}°C</div>
+                    `;
+                    forecastContainer.appendChild(forecastItem);
+                });
+                
+                // Hide loading and show content
+                document.getElementById('weatherLoading').style.display = 'none';
+                document.getElementById('weatherContent').style.display = 'block';
+            } else {
+                document.getElementById('weatherLoading').textContent = "আবহাওয়া তথ্য লোড করতে ব্যর্থ হয়েছে। পরে আবার চেষ্টা করুন।";
+            }
         }
 
         // Initialize
