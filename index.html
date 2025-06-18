@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NajjoBazer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-green: #2c5e1a;
+            --light-green: #4a8c2b;
+            --lighter-green: #5a9e3a;
+            --highlight-green: #d4edbf;
+            --accent-orange: #f5a623;
+            --accent-red: #e74c3c;
+            --dark-red: #c0392b;
+            --bg-color: #f5f9f1;
+            --card-color: #ffffff;
+        }
+        
         body {
-            background-color: #f5f9f1;
+            background-color: var(--bg-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
+            color: #333;
         }
         
         .container {
@@ -18,12 +32,11 @@
             position: relative;
         }
         
-        /* Enhanced Three-dot button styling */
         .menu-button {
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: #4a8c2b;
+            background-color: var(--light-green);
             color: white;
             border: none;
             border-radius: 50%;
@@ -40,19 +53,18 @@
         }
 
         .menu-button:hover {
-            background-color: #3a6e22;
+            background-color: var(--primary-green);
             transform: scale(1.1);
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        /* Enhanced Sliding menu container */
         .side-menu {
             position: fixed;
             top: 0;
             right: -100%;
             height: 100%;
             width: 66%;
-            background-color: #2c5e1a;
+            background-color: var(--primary-green);
             color: white;
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
             transition: right 0.3s ease-in-out;
@@ -67,26 +79,26 @@
             right: 0;
         }
 
-        /* Enhanced Side menu header */
         .side-menu-header {
             text-align: center;
             font-size: 26px;
             font-weight: bold;
-            color: #d4edbf;
+            color: var(--highlight-green);
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 2px solid rgba(255,255,255,0.3);
         }
 
-        /* Enhanced Side menu buttons */
         .side-menu button {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             width: 100%;
             margin: 12px 0;
             padding: 16px;
             background-color: #f8f8f8;
-            color: #2c5e1a;
+            color: var(--primary-green);
             border: none;
             border-radius: 10px;
             font-size: 16px;
@@ -94,6 +106,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            text-align: left;
+        }
+
+        .side-menu button i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
         }
 
         .side-menu button:hover {
@@ -102,11 +121,10 @@
             box-shadow: 0 5px 10px rgba(0,0,0,0.2);
         }
 
-        /* Enhanced Back button styling */
         .back-button {
             width: 70%;
             align-self: center;
-            background-color: #f5a623;
+            background-color: var(--accent-orange);
             color: white;
             border: none;
             padding: 14px;
@@ -117,6 +135,10 @@
             transition: all 0.3s ease;
             margin-top: 25px;
             box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .back-button:hover {
@@ -125,7 +147,6 @@
             box-shadow: 0 5px 10px rgba(0,0,0,0.3);
         }
 
-        /* Enhanced Footer styling */
         .side-menu-footer {
             text-align: center;
             font-size: 13px;
@@ -136,21 +157,19 @@
             border-top: 2px solid rgba(255,255,255,0.3);
         }
 
-        /* Enhanced Main form styling */
         form {
-            background-color: white;
+            background-color: var(--card-color);
             border-radius: 18px;
             padding: 25px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             margin-top: 25px;
         }
 
-        /* Enhanced logo */
         .form-image {
             width: 110px;
             height: auto;
             display: block;
-            margin: 0 auto 25px auto;
+            margin: 0 auto 15px auto;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
@@ -160,7 +179,89 @@
             transform: scale(1.05);
         }
 
-        /* Enhanced Buttons grid */
+        /* Info Cards Container */
+        .info-cards {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0 25px 0;
+        }
+
+        /* Weather and Bazaar Cards */
+        .weather-card, .bazaar-card {
+            flex: 1;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--primary-green);
+            font-size: 15px;
+        }
+
+        .weather-icon {
+            font-size: 20px;
+            color: #1E88E5;
+        }
+
+        .bazaar-icon {
+            font-size: 20px;
+            color: var(--accent-orange);
+        }
+
+        .weather-details, .bazaar-details {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .weather-temp {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .weather-condition {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+
+        .bazaar-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 13px;
+        }
+
+        .bazaar-name {
+            color: #444;
+        }
+
+        .bazaar-price {
+            font-weight: 600;
+            color: var(--light-green);
+        }
+
+        .view-more {
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .view-more a {
+            color: var(--accent-orange);
+            font-size: 11px;
+            text-decoration: none;
+        }
+
         .button-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -173,25 +274,55 @@
             font-size: 16px;
             font-weight: 600;
             color: white;
-            background-color: #5a9e3a;
+            background-color: var(--lighter-green);
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 60px;
+            min-height: 90px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-grid button i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
         }
 
         .button-grid button:hover {
-            background-color: #4a8c2b;
+            background-color: var(--light-green);
             transform: translateY(-4px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
         }
 
-        /* Enhanced Centered button */
+        .button-grid button:hover i {
+            transform: scale(1.2);
+        }
+
+        .button-grid button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255,255,255,0.3);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .button-grid button:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
         .centered-button {
             display: flex;
             justify-content: center;
@@ -204,21 +335,57 @@
             font-size: 17px;
             font-weight: 600;
             color: white;
-            background-color: #e74c3c;
+            background-color: var(--accent-red);
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .centered-button button:hover {
-            background-color: #c0392b;
+            background-color: var(--dark-red);
             transform: translateY(-4px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
         }
 
-        /* Responsive adjustments */
+        /* Weather specific styles */
+        .weather-loading {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .weather-error {
+            color: var(--accent-red);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .refresh-icon {
+            margin-left: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            color: var(--light-green);
+            transition: transform 0.3s ease;
+        }
+        
+        .refresh-icon:hover {
+            transform: rotate(90deg);
+        }
+        
+        .fa-spin {
+            animation: fa-spin 1s infinite linear;
+        }
+        
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 15px;
@@ -228,6 +395,11 @@
                 padding: 20px;
             }
             
+            .info-cards {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
             .button-grid {
                 gap: 15px;
             }
@@ -235,7 +407,7 @@
             .button-grid button {
                 padding: 14px;
                 font-size: 15px;
-                min-height: 55px;
+                min-height: 85px;
             }
             
             .side-menu {
@@ -247,57 +419,290 @@
 </head>
 <body>
     <div class="container">
-        <!-- Three-dot menu button -->
         <button class="menu-button" onclick="toggleMenu()">⋮</button>
 
-        <!-- Main content -->
         <form>
             <img src="20250120_044627.png" alt="NajjoBazer Logo" class="form-image">
 
-            <!-- Buttons grid -->
-            <div class="button-grid">
-                <button type="button" onclick="window.location.href='krishok.html'">কৃষক</button>
-                <button type="button" onclick="window.location.href='middleman.html'">পাইকারি ব্যবসায়ী</button>
-                <button type="button" onclick="window.location.href='endseller.html'">খুচরা ব্যবসায়ী</button>
-                <button type="button" onclick="window.location.href='bazerdor.html'">বাজারদর</button>
-                <button type="button" onclick="window.location.href='digitalhaat.html'">ডিজিটাল - হাট </button>
-                <button type="button" onclick="window.location.href='cropai.html'">Ai রোগ নির্ণয়</button>
-                <button type="button" onclick="window.location.href='weather.html'">আবহাওয়া</button>
-                <button type="button" onclick="window.location.href='sikkha.html'">শিক্ষা জোন</button>
-                <button type="button" onclick="window.location.href='money.html'">আর্থিক সহায়তা</button>
-                <button type="button" onclick="window.location.href='exim.html'">আমদানি-রপ্তানি অনুমাণ</button>
+            <!-- Weather and Bazaar Rate Cards -->
+            <div class="info-cards">
+                <div class="weather-card">
+                    <div class="card-header">
+                        <i class="fas fa-cloud-sun weather-icon" id="weather-icon"></i>
+                        <span>আবহাওয়া 
+                            <i class="fas fa-sync-alt refresh-icon" id="refresh-weather" title="রিফ্রেশ করুন"></i>
+                        </span>
+                    </div>
+                    <div class="weather-details">
+                        <div class="weather-temp" id="temperature">
+                            <span class="weather-loading">লোড হচ্ছে...</span>
+                        </div>
+                        <div class="weather-condition">
+                            <i class="fas fa-location-dot" style="font-size:10px;"></i>
+                            <span id="location">ঢাকা</span>
+                        </div>
+                        <div id="humidity"></div>
+                        <div id="weather-description"></div>
+                        <div id="weather-error" class="weather-error" style="display:none;"></div>
+                    </div>
+                    <div class="view-more">
+                        <a href="weather.html">আরও দেখুন <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bazaar-card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line bazaar-icon"></i>
+                        <span>বাজারদর</span>
+                    </div>
+                    <div class="bazaar-details">
+                        <div class="bazaar-item">
+                            <span class="bazaar-name">চাল</span>
+                            <span class="bazaar-price">৬২ টাকা</span>
+                        </div>
+                        <div class="bazaar-item">
+                            <span class="bazaar-name">আলু</span>
+                            <span class="bazaar-price">৩৫ টাকা</span>
+                        </div>
+                        <div class="bazaar-item">
+                            <span class="bazaar-name">পেঁয়াজ</span>
+                            <span class="bazaar-price">৫৫ টাকা</span>
+                        </div>
+                    </div>
+                    <div class="view-more">
+                        <a href="bazerdor.html">আরও দেখুন <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
 
-            <!-- Help line button -->
+            <!-- Buttons grid -->
+            <div class="button-grid">
+                <button type="button" onclick="window.location.href='krishok.html'">
+                    <i class="fas fa-user-tie"></i>
+                    কৃষক
+                </button>
+                <button type="button" onclick="window.location.href='middleman.html'">
+                    <i class="fas fa-people-carry"></i>
+                    পাইকারি ব্যবসায়ী
+                </button>
+                <button type="button" onclick="window.location.href='endseller.html'">
+                    <i class="fas fa-store"></i>
+                    খুচরা ব্যবসায়ী
+                </button>
+                <button type="button" onclick="window.location.href='bazerdor.html'">
+                    <i class="fas fa-chart-line"></i>
+                    বাজারদর
+                </button>
+                <button type="button" onclick="window.location.href='digitalhaat.html'">
+                    <i class="fas fa-shopping-basket"></i>
+                    ডিজিটাল - হাট
+                </button>
+                <button type="button" onclick="window.location.href='cropai.html'">
+                    <i class="fas fa-robot"></i>
+                    Ai রোগ নির্ণয়
+                </button>
+                <button type="button" onclick="window.location.href='weather.html'">
+                    <i class="fas fa-cloud-sun"></i>
+                    আবহাওয়া
+                </button>
+                <button type="button" onclick="window.location.href='sikkha.html'">
+                    <i class="fas fa-graduation-cap"></i>
+                    শিক্ষা জোন
+                </button>
+                <button type="button" onclick="window.location.href='money.html'">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    আর্থিক সহায়তা
+                </button>
+                <button type="button" onclick="window.location.href='exim.html'">
+                    <i class="fas fa-globe-asia"></i>
+                    আমদানি-রপ্তানি অনুমাণ
+                </button>
+            </div>
+
             <div class="centered-button">
-                <button type="button" onclick="window.location.href='helpline.html'">হেল্প লাইন</button>
+                <button type="button" onclick="window.location.href='helpline.html'">
+                    <i class="fas fa-headset"></i>
+                    হেল্প লাইন
+                </button>
             </div>
         </form>
     </div>
 
     <!-- Side Menu -->
     <div class="side-menu" id="sideMenu">
-        <!-- Header -->
         <div class="side-menu-header">NajjoBazer</div>
-
-        <!-- Menu buttons -->
-        <button onclick="window.location.href='index.html'">Home</button>
-        <button onclick="window.location.href='about.html'">About Us</button>
-        <button onclick="window.location.href='login.html'">Login/Register</button>
-
-        <!-- Footer -->
+        <button onclick="window.location.href='index.html'">
+            <i class="fas fa-home"></i>
+            Home
+        </button>
+        <button onclick="window.location.href='about.html'">
+            <i class="fas fa-info-circle"></i>
+            About Us
+        </button>
+        <button onclick="window.location.href='login.html'">
+            <i class="fas fa-sign-in-alt"></i>
+            Login/Register
+        </button>
         <div class="side-menu-footer">Designed and Developed by Md. Sharif Alom</div>
-
-        <!-- Back button -->
-        <button class="back-button" onclick="toggleMenu()">Back</button>
+        <button class="back-button" onclick="toggleMenu()">
+            <i class="fas fa-arrow-left"></i>
+            Back
+        </button>
     </div>
 
     <script>
-        // Toggle the sliding menu
         function toggleMenu() {
             const menu = document.getElementById('sideMenu');
             menu.classList.toggle('active');
         }
+
+        // Weather API Implementation with multiple fallbacks
+        async function fetchWeather() {
+            const temperatureElement = document.getElementById('temperature');
+            const humidityElement = document.getElementById('humidity');
+            const descriptionElement = document.getElementById('weather-description');
+            const errorElement = document.getElementById('weather-error');
+            const refreshBtn = document.getElementById('refresh-weather');
+            
+            // Show loading state
+            temperatureElement.innerHTML = '<span class="weather-loading">লোড হচ্ছে...</span>';
+            humidityElement.textContent = '';
+            descriptionElement.textContent = '';
+            errorElement.style.display = 'none';
+            refreshBtn.classList.add('fa-spin');
+            
+            try {
+                // Try first API (WeatherAPI.com)
+                const weatherApiResponse = await fetchWithTimeout(
+                    'https://api.weatherapi.com/v1/current.json?key=9a9e2b3d3f7c4f5a9e220553232707&q=Dhaka&lang=bn',
+                    { timeout: 5000 }
+                );
+                
+                if (!weatherApiResponse.ok) throw new Error('WeatherAPI failed');
+                
+                const weatherData = await weatherApiResponse.json();
+                updateWeatherUI(weatherData);
+                
+            } catch (firstError) {
+                console.log('First API failed, trying fallback');
+                
+                try {
+                    // Try second API (OpenWeatherMap)
+                    const owmResponse = await fetchWithTimeout(
+                        'https://api.openweathermap.org/data/2.5/weather?q=Dhaka&appid=f7bc68c3afc6c231d68d08e49dbb8ba5&units=metric&lang=bn',
+                        { timeout: 5000 }
+                    );
+                    
+                    if (!owmResponse.ok) throw new Error('OpenWeatherMap failed');
+                    
+                    const owmData = await owmResponse.json();
+                    updateWeatherWithOWM(owmData);
+                    
+                } catch (secondError) {
+                    console.error('All weather APIs failed:', secondError);
+                    showWeatherError('সর্বশেষ তথ্য লোড করতে ব্যর্থ');
+                    setDefaultWeather();
+                }
+            } finally {
+                refreshBtn.classList.remove('fa-spin');
+            }
+        }
+
+        function fetchWithTimeout(url, options = {}) {
+            const { timeout = 8000 } = options;
+            
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeout);
+            
+            return fetch(url, {
+                ...options,
+                signal: controller.signal
+            }).finally(() => clearTimeout(timeoutId));
+        }
+
+        function updateWeatherUI(data) {
+            // For WeatherAPI.com response
+            const temp = Math.round(data.current.temp_c);
+            const humidity = data.current.humidity;
+            const description = data.current.condition.text;
+            
+            document.getElementById('temperature').textContent = `${temp}°C`;
+            document.getElementById('humidity').textContent = `আর্দ্রতা: ${humidity}%`;
+            document.getElementById('weather-description').textContent = description;
+            
+            const weatherIcon = document.getElementById('weather-icon');
+            weatherIcon.className = `fas ${getWeatherIcon(data.current.condition.code)} weather-icon`;
+        }
+
+        function updateWeatherWithOWM(data) {
+            // For OpenWeatherMap response
+            const temp = Math.round(data.main.temp);
+            const humidity = data.main.humidity;
+            const description = data.weather[0].description;
+            
+            document.getElementById('temperature').textContent = `${temp}°C`;
+            document.getElementById('humidity').textContent = `আর্দ্রতা: ${humidity}%`;
+            document.getElementById('weather-description').textContent = description;
+            
+            const weatherIcon = document.getElementById('weather-icon');
+            weatherIcon.className = `fas ${getOWMIcon(data.weather[0].icon)} weather-icon`;
+        }
+
+        function getWeatherIcon(code) {
+            // Simplified icon mapping for WeatherAPI
+            if (code === 1000) return 'fa-sun'; // Sunny
+            if (code === 1003) return 'fa-cloud-sun'; // Partly cloudy
+            if (code === 1006 || code === 1009) return 'fa-cloud'; // Cloudy
+            if (code >= 1063 && code <= 1201) return 'fa-cloud-rain'; // Rain
+            if (code >= 1204 && code <= 1237) return 'fa-snowflake'; // Snow
+            if (code >= 1240 && code <= 1264) return 'fa-cloud-showers-heavy'; // Heavy rain
+            if (code === 1273 || code === 1276) return 'fa-bolt'; // Thunderstorm
+            return 'fa-cloud-sun'; // Default
+        }
+
+        function getOWMIcon(iconCode) {
+            // Mapping for OpenWeatherMap icons
+            const iconMap = {
+                '01': 'fa-sun',
+                '02': 'fa-cloud-sun',
+                '03': 'fa-cloud',
+                '04': 'fa-cloud',
+                '09': 'fa-cloud-rain',
+                '10': 'fa-cloud-sun-rain',
+                '11': 'fa-bolt',
+                '13': 'fa-snowflake',
+                '50': 'fa-smog'
+            };
+            const prefix = iconCode.slice(0, 2);
+            return iconMap[prefix] || 'fa-cloud-sun';
+        }
+
+        function showWeatherError(message) {
+            const errorElement = document.getElementById('weather-error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function setDefaultWeather() {
+            document.getElementById('temperature').textContent = '৩০°C';
+            document.getElementById('humidity').textContent = 'আর্দ্রতা: ৭৫%';
+            document.getElementById('weather-description').textContent = 'আংশিক মেঘলা';
+            document.getElementById('weather-icon').className = 'fas fa-cloud-sun weather-icon';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchWeather();
+            
+            // Refresh on button click
+            document.getElementById('refresh-weather').addEventListener('click', function(e) {
+                e.stopPropagation();
+                fetchWeather();
+            });
+            
+            // Refresh every 30 minutes
+            setInterval(fetchWeather, 1800000);
+        });
     </script>
 </body>
 </html>
