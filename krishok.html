@@ -236,52 +236,54 @@
         </form>
     </div>
 
-    <script>
-        const farmers = [
-            { name: "Abdul Karim", division: "dhaka", district: "shariatpur", upazila: "bhedorgonj", link: "farmer1.html" },
-            { name: "Hasan Ali", division: "dhaka", district: "gazipur", upazila: "kapasia", link: "farmer2.html" },
-            { name: "Rahima Begum", division: "dhaka", district: "shariatpur", upazila: "bhedorgonj", link: "farmer3.html" },
-            { name: "Jalal Uddin", division: "chittagong", district: "tangail", upazila: "kaliakair", link: "farmer4.html" },
-            { name: "Fatema Khatun", division: "khulna", district: "manikganj", upazila: "kaliganj", link: "farmer5.html" }
-        ];
+<script>
+    const farmers = [
+        { name: "Abdul Karim", division: "dhaka", district: "shariatpur", upazila: "bhedorgonj", link: "farmer1.html" },
+        { name: "Hasan Ali", division: "dhaka", district: "gazipur", upazila: "kapasia", link: "farmer2.html" },
+        { name: "Rahima Begum", division: "dhaka", district: "shariatpur", upazila: "bhedorgonj", link: "farmer3.html" },
+        { name: "Jalal Uddin", division: "chittagong", district: "tangail", upazila: "kaliakair", link: "farmer4.html" },
+        { name: "Fatema Khatun", division: "khulna", district: "manikganj", upazila: "kaliganj", link: "farmer5.html" }
+    ];
 
-        const originalFarmersList = document.getElementById('farmersList').innerHTML;
+    const originalFarmersList = document.getElementById('farmersList').innerHTML;
 
-        function applyFilter() {
-            const division = document.getElementById('division').value;
-            const district = document.getElementById('district').value;
-            const upazila = document.getElementById('upazila').value;
+    function applyFilter() {
+        const division = document.getElementById('division').value;
+        const district = document.getElementById('district').value.toLowerCase().replace(/\s+/g, '').replace("'", "");
+        const upazila = document.getElementById('upazila').value.toLowerCase();
+        
+        const filteredFarmers = farmers.filter(farmer => {
+            const matchesDivision = !division || farmer.division === division.toLowerCase();
+            const matchesDistrict = !district || farmer.district === district;
+            const matchesUpazila = !upazila || farmer.upazila === upazila;
             
-            const filteredFarmers = farmers.filter(farmer => {
-                return (!division || farmer.division === division) &&
-                       (!district || farmer.district === district) &&
-                       (!upazila || farmer.upazila === upazila);
+            return matchesDivision && matchesDistrict && matchesUpazila;
+        });
+        
+        const farmersList = document.getElementById('farmersList');
+        farmersList.innerHTML = '';
+        
+        if (filteredFarmers.length === 0) {
+            farmersList.innerHTML = '<p class="no-results">No matching farmers found</p>';
+        } else {
+            filteredFarmers.forEach(farmer => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.textContent = farmer.name;
+                button.onclick = function() {
+                    window.location.href = farmer.link;
+                };
+                farmersList.appendChild(button);
             });
-            
-            const farmersList = document.getElementById('farmersList');
-            farmersList.innerHTML = '';
-            
-            if (filteredFarmers.length === 0) {
-                farmersList.innerHTML = '<p class="no-results">No matching farmers found</p>';
-            } else {
-                filteredFarmers.forEach(farmer => {
-                    const button = document.createElement('button');
-                    button.type = 'button';
-                    button.textContent = farmer.name;
-                    button.onclick = function() {
-                        window.location.href = farmer.link;
-                    };
-                    farmersList.appendChild(button);
-                });
-            }
         }
+    }
 
-        function resetFilter() {
-            document.getElementById('division').value = "";
-            document.getElementById('district').value = "";
-            document.getElementById('upazila').value = "";
-            document.getElementById('farmersList').innerHTML = originalFarmersList;
-        }
-    </script>
+    function resetFilter() {
+        document.getElementById('division').value = "";
+        document.getElementById('district').value = "";
+        document.getElementById('upazila').value = "";
+        document.getElementById('farmersList').innerHTML = originalFarmersList;
+    }
+</script>
 </body>
 </html>
